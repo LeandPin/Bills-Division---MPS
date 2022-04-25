@@ -14,7 +14,7 @@ Quando múltiplos clientes dividem uma mesa de algum estabelecimento nem todos c
 * Principal/Administrador;
 * Básico;
 
-O programa permitirá o cadastro de usuários principais, que terão privilégios de adicionar outros participantes, itens, remover usuário, editar usuários básicos e itens, verificar total da conta e o total para cada usuário à parte. O usuário básico terá o privilégio de pagar sua parte e retirar-se da conta que será registrada em um histórico.
+O programa permitirá o cadastro de usuários principais, que terão privilégios de adicionar outros participantes, itens, remover usuário, editar usuários  e itens, verificar total da conta e o total para cada usuário à parte. O usuário básico terá o privilégio de pagar sua parte e retirar-se da conta que será registrada em um histórico.
 
 Ao entrar pela primeira vez no programa (caso não exista usuário cadastrado anteriormente), será exibida uma mensagem para cadastrar um usuário principal, e permitirá o cadastro do mesmo. Após isso, será solicitado um login e senha do usuário principal (cadastrado anteriormente) para uso da aplicação.
 
