@@ -7,14 +7,14 @@ Este é um projeto referente a disciplina Métodos de Projetos de Software, ofer
 ## Objetivo
 Têm-se como objetivo principal a criação de uma aplicação de divisão de comanda, denominada Bill Division. 
 
-Quando múltiplos clientes dividem uma mesa de algum estabelecimento nem todos consomem as mesmas coisas, e na hora de dividir cálculos precisam ser feitos para atribuir um valor a ser pago por cada um na conta. Sendo assim, o Bill Division veio para descomplicar esse inconveniente, atribuindo diretamente o valor a ser pago por cada um da mesa, sem precisar com que os clientes façam quaisquer cálculos de divisão.
+Quando múltiplos clientes dividem uma mesa de algum estabelecimento nem todos consomem as mesmas coisas, e na hora de dividir a conta cálculos precisam ser feitos para atribuir um valor a ser pago por cada um. Sendo assim, o Bill Division veio para descomplicar esse inconveniente, atribuindo diretamente o valor a ser pago por cada um da mesa, sem precisar com que os clientes façam quaisquer cálculos de divisão.
 
 ## Descrição
 ### Tipos de usuário
 * Principal/Administrador;
 * Básico;
 
-O programa permitirá o cadastro de usuários principais, que terão privilégios de adicionar outros participantes (usuários básicos), itens, remover usuário, editar usuários básicos e itens, verificar total da conta e o total para cada usuário à parte. O usuário básico terá o privilégio de pagar sua parte e retirar-se da conta que será registrada em um histórico.
+O programa permitirá o cadastro de usuários principais, que terão privilégios de adicionar outros participantes, itens, remover usuário, editar usuários básicos e itens, verificar total da conta e o total para cada usuário à parte. O usuário básico terá o privilégio de pagar sua parte e retirar-se da conta que será registrada em um histórico.
 
 Ao entrar pela primeira vez no programa (caso não exista usuário cadastrado anteriormente), será exibida uma mensagem para cadastrar um usuário principal, e permitirá o cadastro do mesmo. Após isso, será solicitado um login e senha do usuário principal (cadastrado anteriormente) para uso da aplicação.
 
