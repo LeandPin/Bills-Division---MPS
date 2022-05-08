@@ -31,6 +31,8 @@ public:
     static void senha_invalida();
 
     static void usuario_nao_encontrado();
+
+    static void modoExib();
 };
 
 
