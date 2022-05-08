@@ -49,34 +49,34 @@ Ao entrar pela primeira vez no programa (caso não exista usuário cadastrado an
  ## Telas
  
  ### Tela Quando não há usuários cadastrados
-  <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/Tela0Usuarios.jpeg" alt="Tela0" style="width:600px;"/>
+  <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/Telas%20do%20projeto/Tela0Usuarios.jpeg" alt="Tela0" style="width:600px;"/>
  
  ### Tela de Cadastro 1º Administrador
-  <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/TelaDeCadastroAdmin.jpeg" alt="CadastrofirstAdmin" width="600"/>
+  <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/Telas%20do%20projeto/TelaDeCadastroAdmin.jpeg" alt="CadastrofirstAdmin" width="600"/>
  
  ### Tela de Login Primeiro Administrador e Menu Principal
-   <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/Teladelogin.jpeg" alt="LoginfirstAdmin" width="600"/>
+   <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/Telas%20do%20projeto/Teladelogin.jpeg" alt="LoginfirstAdmin" width="600"/>
    
  ### Tela de informação do usuário
-  <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/TelaInforma%C3%A7%C3%A3oUsuario.jpeg" alt="informaçãoUsuario" width="600"/>
+  <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/Telas%20do%20projeto/TelaInforma%C3%A7%C3%A3oUsuario.jpeg" alt="informaçãoUsuario" width="600"/>
 
 ### Tela de Alteração dos dados
-  <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/TelaAltera%C3%A7%C3%A3oDados.jpeg" alt="alteraçãodosdados" width="600"/>
+  <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/Telas%20do%20projeto/TelaAltera%C3%A7%C3%A3oDados.jpeg" alt="alteraçãodosdados" width="600"/>
 
 ### Tela de Administrador
-   <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/%C3%81reaDoAdministrador.jpeg" alt="telaAdmin" width="600"/>
+   <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/Telas%20do%20projeto/%C3%81reaDoAdministrador.jpeg" alt="telaAdmin" width="600"/>
 
 ### Tela de adicionar novo usuário
- <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/AdicionandoNovoUsuario.jpeg" alt="NewUser" width="600"/>
+ <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/Telas%20do%20projeto/AdicionandoNovoUsuario.jpeg" alt="NewUser" width="600"/>
  
  ### Tela de Cadastro/Login Inválido
- <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/ExibindoErroLogin.jpeg" alt="LoginInvalido" width="600"/>
+ <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/Telas%20do%20projeto/ExibindoErroLogin.jpeg" alt="LoginInvalido" width="600"/>
  
  ### Tela de listar todos os usuários
- <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/ListandoTodosUsu%C3%A1rios.jpeg" alt="ListarUsuarios" width="600"/>
+ <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/Telas%20do%20projeto/ListandoTodosUsu%C3%A1rios.jpeg" alt="ListarUsuarios" width="600"/>
  
  ### Tela de trocar Usuário
- <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/TrocandoDeUsuario.jpeg" alt="TrocarUsuario" width="600"/>
+ <img src="https://github.com/LeandPin/Bills-Division---MPS/blob/main/Telas%20do%20projeto/TrocandoDeUsuario.jpeg" alt="TrocarUsuario" width="600"/>
  
  
  
