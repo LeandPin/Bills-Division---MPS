@@ -5,6 +5,8 @@ Esta é a função principal do projeto.
 #include <string>
 #include <cstring>
 #include <vector>
+#include <iterator>
+#include <set>
 #include "../headers/Telas.h"
 #include "../headers/Usuario.h"
 #include "../headers/UsuarioAdmin.h"
@@ -42,8 +44,8 @@ Usuario* LoginUsuario(vector<Usuario*> usuarios) {
 
 Usuario* criar_usuario(UsuarioAdmin& adm) {
     string nome, login, senha, privilegio = "";
-    Telas::Cadastrar("login");
-    getline(cin, login);
+    Telas::Cadastrar("nome");
+    getline(cin, nome);
 
     Telas::Cadastrar("login");
     getline(cin, login);
@@ -92,6 +94,7 @@ int main() {
     int x=0, n=0; // Variáveis para o funcionamento do while, switch e for
     UsuarioAdmin usuario;
     vector<Usuario*> usuarios;
+    set<string, less<string>> treeSetUsuarios;
     string usuarioprincipal, senha, login;
     string usuarionormal;
     string conferesenha, conferelogin;
@@ -119,6 +122,7 @@ int main() {
                     Usuario* admin = SUPERUSER->CriarUsuario(usuarioprincipal, login, senha, 1);
                     admin->modificarInformacoes(usuarioprincipal, login, senha);
                     usuarios.push_back(admin);
+                    treeSetUsuarios.insert(login);
                 }
                 catch (UserNameException& e) {
                     Telas::login_invalido();
@@ -180,15 +184,40 @@ int main() {
                     cin.ignore();
 
                     switch (x) {
-                        case 1:
-                            for (auto elemento: usuarios) {
-                                cout << elemento->getLogin() << endl;
+                        case 1: //mudar a exibição de user aqui
+                            Telas::modoExib();
+                            cin >> x;
+                            cin.ignore();
+                            switch (x){
+                                case 1:{ //ordem de criação
+                                    for (auto elemento: usuarios) {
+                                        cout << elemento->getLogin() << endl;
+                                    }
+                                    break;
+                                }
+                                case 2:{
+                                    set<string, greater<string> >::iterator itr;
+                                    for (itr = treeSetUsuarios.begin(); itr != treeSetUsuarios.end(); itr++) {
+                                        cout << *itr << "\n";
+                                    }
+                                    cout << endl;
+                                    break;
+                                }
+                                case 3:{
+                                    //TODO ordenar por nascimento
+                                    break;
+                                }
+                                default:{
+                                    break;
+                                }
                             }
                             break;
                         case 2:
                         case 3:
                             try {
-                                usuarios.push_back(criar_usuario(*SUPERUSER));
+                                Usuario *usuarioNovo = criar_usuario(*SUPERUSER);
+                                usuarios.push_back(usuarioNovo);
+                                treeSetUsuarios.insert(usuarioNovo->getLogin());
                             }
                             catch (UserNameException& e) {
                                 Telas::login_invalido();

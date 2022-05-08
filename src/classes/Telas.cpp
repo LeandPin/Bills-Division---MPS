@@ -93,7 +93,7 @@ void Telas::login_invalido() {
     cout << "O login digitado eh invalido. Verifique se ele segue os seguintes parametros:" << endl;
     cout << "- Maximo 12 caracteres\n";
     cout << "- Nao pode ser vazio.\n";
-    cout << "- Nao pode ter números.\n";
+    cout << "- Nao pode ter numeros.\n";
     cout<< "\n--------------------------------------------------------------\n" << endl;
 }
 
@@ -102,8 +102,8 @@ void Telas::senha_invalida() {
     cout<< "\n--------------------------------------------------------------\n" << endl;
     cout << "A senha digitada eh invalida. Verifique se ela segue os seguintes parametros:" << endl;
     cout << "- Maximo 20 caracteres\n";
-    cout << "- Mínimo de 8 caracteres.\n";
-    cout << "- deve possuir letras e no mínimo 2 números.\n";
+    cout << "- Minimo de 8 caracteres.\n";
+    cout << "- deve possuir letras e no minimo 2 numeros.\n";
     cout<< "\n--------------------------------------------------------------\n" << endl;
 }
 
@@ -111,5 +111,15 @@ void Telas::senha_invalida() {
 void Telas::usuario_nao_encontrado() {
     cout<< "\n--------------------------------------------------------------\n" << endl;
     cout << "O usuario Digitado nao foi encontrado." << endl;
+    cout<< "\n--------------------------------------------------------------\n" << endl;
+}
+
+
+void Telas::modoExib() {
+    cout<< "\n--------------------------------------------------------------\n" << endl;
+    cout << "Selecione o modo de exibicao de usuarios:" << endl;
+    cout << "1) Exibir por ordem de criacao" << endl;
+    cout << "2) Exibir por ordem alfabetica crescente de login" << endl;
+    cout << "3) Exibir por ordem decrescente de data de nascimento" << endl;
     cout<< "\n--------------------------------------------------------------\n" << endl;
 }
