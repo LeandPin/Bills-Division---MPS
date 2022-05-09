@@ -8,6 +8,7 @@ Super-classe Referente aos Usuários, com atributos e classes para cadastro.
 #include <iostream>
 #include "../headers/UserNameException.h"
 #include "../headers/UserPasswordException.h"
+#include "../headers/Data.h"
 
 using namespace std;
 
@@ -41,6 +42,8 @@ private:
     string Senha;
     string Login;
     bool privilegios;
+    Data data_nascimento;
+    
 
 
     static bool CheckLogin(string login);
