@@ -23,11 +23,14 @@ public:
     void setNome(string nome);
     void setSenha(string senha);
     void setLogin(string login);
+    void setDATA(int dia, int mes, int ano);
     void setPrivilegios(bool p);
     string getNome();
     string getSenha();
     string getLogin();
+    int getData();
     bool getPrivilegios();
+    
    
     void modificarInformacoes(string nome="", string login="", string senha="");
     bool compararLogin(string login);

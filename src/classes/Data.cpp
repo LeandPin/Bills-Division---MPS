@@ -10,10 +10,17 @@ Data::~Data()
 
 }
 
-Data::Data(int dia, int mes, int ano){
-    this->dia = dia;
-    this->mes = mes;
-    this->ano = ano;
+
+
+void Data::setDia(int dia){
+     this->dia = dia;
+}
+void Data::setAno(int ano){
+this->ano = ano;
+}
+
+void Data::setMes(int mes){
+this->mes = mes;
 }
 
 int Data::getDia(){

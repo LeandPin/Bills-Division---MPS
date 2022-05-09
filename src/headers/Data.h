@@ -7,8 +7,10 @@ class Data
 {
 public:
     Data();
-    Data(int dia, int mes, int ano);
     ~Data();
+    void setDia(int dia);
+    void setAno(int ano);
+    void setMes(int mes);
     int getDia();
     int getAno();
     int getMes();

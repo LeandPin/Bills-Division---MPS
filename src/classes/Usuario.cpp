@@ -140,4 +140,16 @@ bool Usuario::compararSenha(string senha) {
     }
     return false;
 }
+
+
+void Usuario::setDATA(int dia, int mes, int ano){
+   data_nascimento.setDia(dia);
+   data_nascimento.setMes(mes);
+   data_nascimento.setAno(ano);
+}
+
+int Usuario::getData(){
+    return  data_nascimento.getDia(),data_nascimento.getMes(), data_nascimento.getAno();
+}
+ 
     
