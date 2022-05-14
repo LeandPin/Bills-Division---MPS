@@ -28,7 +28,10 @@ public:
     string getNome();
     string getSenha();
     string getLogin();
-    int getData();
+    std::tuple<int, int, int> getData();
+    int getAno();
+    int getMes();
+    int getDia();
     bool getPrivilegios();
     
    

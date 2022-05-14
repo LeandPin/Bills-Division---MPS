@@ -3,7 +3,8 @@
 //
 
 #include "../headers/Telas.h"
-
+#include "../headers/Data.h"
+#include <tuple>
 
 /*
 Função Que Exibe Um MenuPrincipal De Funcionalidades e Opções do Programa.
@@ -43,11 +44,13 @@ void Telas::login() {
 }
 
 
-void Telas::exibirInformacoes(string nome, string login, string senha, bool p) {
+void Telas::exibirInformacoes(string nome, string login, string senha, bool p, std::tuple<int, int, int> dataNascimento) {
     cout<< "\n--------------------------------------------------------------\n" << endl;
     cout << "O nome registrado eh: " << nome << endl;
     cout << "O login eh: " << login << endl;
     cout << "A senha eh: " << senha << endl;
+    auto [dia, mes, ano] = dataNascimento;
+    cout << "A data de nascimento eh: " << dia << "/" << mes << "/" << ano << endl;
     if (p) {
         cout << "Este usuario e um administrador\n" << endl;
     }
