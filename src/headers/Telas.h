@@ -16,7 +16,7 @@ public:
     static void Cadastrar(string x);
     static void login();
 
-    static void exibirInformacoes(string nome, string login, string senha, bool p);
+    static void exibirInformacoes(string nome, string login, string senha, bool p, std::tuple<int, int, int> dataNascimento);
 
     static void alterarNome();
 

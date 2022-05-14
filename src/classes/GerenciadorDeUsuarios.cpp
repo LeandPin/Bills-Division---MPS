@@ -7,12 +7,13 @@
 #include "../headers/UserPasswordException.h"
 #include <utility>
 
-Usuario* GerenciadorDeUsuarios::CriarUsuario(string nome, string login, string senha, bool privilegios) {
+Usuario* GerenciadorDeUsuarios::CriarUsuario(string nome, string login, string senha, bool privilegios, int dia, int mes, int ano) {
     Usuario* novo_usuario = new Usuario();
 
     try{
     novo_usuario->setLogin(std::move(login));
     novo_usuario->setSenha(std::move(senha));
+    novo_usuario->setDATA(dia, mes, ano);
     }
     catch (UserNameException& e) {
         throw e;
@@ -27,9 +28,10 @@ Usuario* GerenciadorDeUsuarios::CriarUsuario(string nome, string login, string s
 }
 
 
-void GerenciadorDeUsuarios::alterarDadosDoUsuario(Usuario u, string nome, string login, string senha, bool privilegio) {
+void GerenciadorDeUsuarios::alterarDadosDoUsuario(Usuario u, string nome, string login, string senha, bool privilegio, int dia, int mes, int ano) {
     u.modificarInformacoes(nome, login, senha);
     u.setPrivilegios(privilegio);
+    u.setDATA(dia, mes, ano);
 }
 
 

@@ -1,6 +1,7 @@
 #include "../headers/Usuario.h"
 #include <string>
 #include <iostream>
+#include <tuple>
 
 /*
 Arquivo Usuario.cpp contendo Construtor da superclasse Usuário 
@@ -148,8 +149,18 @@ void Usuario::setDATA(int dia, int mes, int ano){
    data_nascimento.setAno(ano);
 }
 
-int Usuario::getData(){
-    return  data_nascimento.getDia(),data_nascimento.getMes(), data_nascimento.getAno();
+std::tuple<int, int, int> Usuario::getData(){
+    return  {data_nascimento.getDia(),data_nascimento.getMes(), data_nascimento.getAno()};
 }
- 
-    
+
+int Usuario::getAno(){
+    return  data_nascimento.getAno();
+}
+
+int Usuario::getMes(){
+    return  data_nascimento.getMes();
+}
+
+int Usuario::getDia(){
+    return  data_nascimento.getDia();
+}

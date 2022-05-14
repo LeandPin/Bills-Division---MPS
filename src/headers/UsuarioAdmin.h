@@ -15,7 +15,7 @@ class UsuarioAdmin : public Usuario
 {
 public:
     UsuarioAdmin();
-    static Usuario* CriarUsuario(string nome, string login, string senha, bool privilegios);
+    static Usuario* CriarUsuario(string nome, string login, string senha, bool privilegios, int dia, int mes, int ano);
     
     
     
