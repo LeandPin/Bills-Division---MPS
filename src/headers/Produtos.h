@@ -21,6 +21,7 @@ public:
 private:
 string nomeProduto;
 int codigo;
+int tipo;
 
 
 };
