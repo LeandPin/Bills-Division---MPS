@@ -12,16 +12,23 @@ class Produtos
 public:
     Produtos();
     ~Produtos();
+
     void setNomeProduto(string nome);
     void setCodigo(int codigo);
+    void setTipo(int tipo);
+    void setPreco(double preco);
+
     string getnomeProduto();
     int getCodigo();
+    int getTipo();
+    double getPreco();
     
 
 private:
-string nomeProduto;
-int codigo;
-int tipo;
+    string nomeProduto;
+    int codigo;
+    double preco;
+    int tipo;
 
 
 };
