@@ -28,10 +28,16 @@ Usuario* GerenciadorDeUsuarios::CriarUsuario(string nome, string login, string s
 }
 
 
-void GerenciadorDeUsuarios::alterarDadosDoUsuario(Usuario u, string nome, string login, string senha, bool privilegio, int dia, int mes, int ano) {
-    u.modificarInformacoes(nome, login, senha);
+void GerenciadorDeUsuarios::alterarDadosDoUsuario(Usuario &u, string nome, string login, string senha, bool privilegio, int dia, int mes, int ano) {
+    try {
+    u.setNome(nome);
+    u.setSenha(senha);
     u.setPrivilegios(privilegio);
     u.setDATA(dia, mes, ano);
+    }
+    catch (UserPasswordException &e) {
+        throw e;
+    }
 }
 
 

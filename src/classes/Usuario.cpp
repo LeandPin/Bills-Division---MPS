@@ -1,6 +1,5 @@
 #include "../headers/Usuario.h"
 #include <string>
-#include <iostream>
 #include <tuple>
 
 /*
@@ -94,7 +93,7 @@ bool Usuario::CheckPswd(string senha){
      *      - Mínimo 8 caracteres
      *      - Deve possuir letras e no mínimo 2 números.
      */
-    if (senha.length()<8){ // A senha deve possuir, no mínimo, 8 dígitos.
+    if (senha.length()<8 || senha.empty()){ // A senha deve possuir, no mínimo, 8 dígitos.
         return false;
     }else if (senha.length()>=21){ // A senha deve possuir, no máximo, 20 dígitos.
         return false;
@@ -113,17 +112,6 @@ bool Usuario::CheckPswd(string senha){
         return false;
     }
     return true;
-}
-
-
-void Usuario::modificarInformacoes(string nome, string login, string senha) {
-    if (senha != "" && CheckPswd(senha)) {
-        this->Senha = senha;
-    }
-    else throw UserPasswordException();
-    if (nome != "") {
-        this->nomeDoUsuario = nome;
-    }
 }
 
 

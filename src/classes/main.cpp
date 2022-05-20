@@ -30,6 +30,8 @@ Usuario * LoginUsuario(vector < Usuario * > usuarios) {
     getline(cin, senha);
 
     for (auto elemento: usuarios) {
+        bool res1 = elemento->compararLogin(login);
+        bool res2 = elemento->compararSenha(senha);
         if (elemento -> compararLogin(login) && elemento -> compararSenha(senha)) {
             return elemento;
         }
@@ -37,7 +39,7 @@ Usuario * LoginUsuario(vector < Usuario * > usuarios) {
     throw UserNotFoundException();
 }
 
-Usuario * criar_usuario(UsuarioAdmin & adm) {
+Usuario * criar_usuario(UsuarioAdmin adm) {
     string nome, login, senha, privilegio = "";
     int dia, mes, ano;
     Telas::Cadastrar("nome");
@@ -69,6 +71,7 @@ Usuario * criar_usuario(UsuarioAdmin & adm) {
 }
 
 void alterar_dados(Usuario * user) {
+    GerenciadorDeUsuarios gerente = GerenciadorDeUsuarios();
     string nome, senha = "";
     Telas::alterarNome();
     getline(cin, nome);
@@ -76,7 +79,8 @@ void alterar_dados(Usuario * user) {
     Telas::alterarSenha();
     getline(cin, senha);
     try {
-        user -> modificarInformacoes(nome, "", senha);
+        gerente.alterarDadosDoUsuario(*user, nome,"", senha, user->getPrivilegios(), user->getDia(), user->getMes(), user->getAno());
+        // user -> modificarInformacoes(nome, "", senha); depreciado
     } catch (UserNameException & e) {
         Telas::login_invalido();
     } catch (UserPasswordException & e) {
@@ -100,14 +104,16 @@ bool compare(tuple<int, int, int> d1, tuple<int, int, int> d2){
  }
 
 int main() {
-    UsuarioAdmin * SUPERUSER = new UsuarioAdmin();
+    const UsuarioAdmin * SUPERUSER = new UsuarioAdmin();
+    GerenciadorDeUsuarios gerente = GerenciadorDeUsuarios();
     Usuario * usuario_logado = nullptr;
-    string _ = ""; // variável dummy
+    vector < Usuario * > usuarios; // Substituir por std::map<Usuario, Produto>
+
+    string _; // variável dummy
     int x = 0, n = 0; // Variáveis para o funcionamento do while, switch e for
-    UsuarioAdmin usuario;
-    vector < Usuario * > usuarios;
     set < string, less < string >> treeSetUsuarios;
     set < tuple<int, int, int>, decltype(compare)*> treeSetUsuariosData(compare);
+
     string usuarioprincipal, senha, login;
     string usuarionormal;
     string conferesenha, conferelogin;
@@ -139,7 +145,8 @@ int main() {
 
                 try {
                     Usuario * admin = SUPERUSER -> CriarUsuario(usuarioprincipal, login, senha, 1, dia, mes, ano);
-                    admin -> modificarInformacoes(usuarioprincipal, login, senha);
+
+                    gerente.alterarDadosDoUsuario(*admin, usuarioprincipal, login, senha, 1, dia, mes, ano);
                     usuarios.push_back(admin);
                     treeSetUsuarios.insert(login);
                     treeSetUsuariosData.insert({dia, mes, ano});

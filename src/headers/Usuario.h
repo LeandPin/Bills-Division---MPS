@@ -34,8 +34,7 @@ public:
     int getDia();
     bool getPrivilegios();
     
-   
-    void modificarInformacoes(string nome="", string login="", string senha="");
+
     bool compararLogin(string login);
     bool compararSenha(string senha);
 
