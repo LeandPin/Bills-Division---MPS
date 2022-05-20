@@ -105,7 +105,7 @@ bool compare(tuple<int, int, int> d1, tuple<int, int, int> d2){
 
 int main() {
     const UsuarioAdmin * SUPERUSER = new UsuarioAdmin();
-    GerenciadorDeUsuarios gerente = GerenciadorDeUsuarios();
+    GerenciadorDeUsuarios gerente = GerenciadorDeUsuarios(); // TODO passar para a fachada.
     Usuario * usuario_logado = nullptr;
     vector < Usuario * > usuarios; // Substituir por std::map<Usuario, Produto>
 
