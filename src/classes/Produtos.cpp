@@ -48,3 +48,11 @@ int Produtos::getTipo(){
 double Produtos::getPreco() {
     return preco;
 }
+
+void Produtos::setQuantidade(int qnt) {
+    this->quantidade = qnt;
+}
+
+int Produtos::getQuantidade() {
+    return quantidade;
+}

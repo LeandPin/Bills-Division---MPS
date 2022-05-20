@@ -17,17 +17,19 @@ public:
     void setCodigo(int codigo);
     void setTipo(int tipo);
     void setPreco(double preco);
+    void setQuantidade(int qnt);
 
     string getnomeProduto();
     int getCodigo();
     int getTipo();
     double getPreco();
-    
+    int getQuantidade();
 
 private:
     string nomeProduto;
     int codigo;
     double preco;
+    int quantidade;
     int tipo;
 
 
