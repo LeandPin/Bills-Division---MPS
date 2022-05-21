@@ -9,15 +9,16 @@
 /*
 Função Que Exibe Um MenuPrincipal De Funcionalidades e Opções do Programa.
 */
-void Telas::MenuPrincipal(){
+void Telas::MenuPrincipal(string login){
     cout<< "\n--------------------------------------------------------------\n" << endl;
-    cout << "Este eh o Bill Division, feito Para descomplicar suas comandas!" << endl;
-
+    cout << "Este eh o Bill Division, feito Para descomplicar suas comandas!\n" << endl;
+    cout << "Ola, " << login << endl;
     cout << "\n--------------MenuPrincipal De Opcoes-------------------\n" << endl;
-    cout << "---Digite 1 Para Trocar de Usuario---" << endl;
-    cout << "---Digite 2 Para Ver Informacoes do Usuario-------------------" << endl;
-    cout << "---Digite 3 Para Acessar Area do Administrador-" << endl;
-    cout << "---Digite 4 Para Encerrar O Programa-----------" << endl;
+    cout << "   Digite 1 Para Trocar de Usuario" << endl;
+    cout << "   Digite 2 Para Ver Informacoes do Usuario" << endl;
+    cout << "   Digite 3 Para adicionar um produto" << endl;
+    cout << "   Digite 4 Para Acessar Area do Administrador" << endl;
+    cout << "   Digite 5 Para Encerrar O Programa" << endl;
     cout<< "\n-------------------------------------------------------------\n" << endl;
     cout <<"Insira Sua Opcao:" << endl;
 }
@@ -125,4 +126,24 @@ void Telas::modoExib() {
     cout << "2) Exibir por ordem alfabetica crescente de login" << endl;
     cout << "3) Exibir por ordem decrescente de data de nascimento" << endl;
     cout<< "\n--------------------------------------------------------------\n" << endl;
+}
+
+void Telas::AdicionarProdutoNome() {
+    cout << "\n--------------------------------------------------------------\n" << endl;
+    cout << "Digite o Nome do produto:" << endl;
+}
+
+void Telas::AdicionarProdutoQuantidade() {
+    cout << "\n--------------------------------------------------------------\n" << endl;
+    cout << "Digite a quantidade do produto:" << endl;
+}
+
+void Telas::AdicionarProdutoPreco() {
+    cout << "\n--------------------------------------------------------------\n" << endl;
+    cout << "Digite o preco do produto:" << endl;
+}
+
+void Telas::AdicionarProdutoID() {
+    cout << "\n--------------------------------------------------------------\n" << endl;
+    cout << "Digite o número de identificacao (ID) do produto:" << endl;
 }

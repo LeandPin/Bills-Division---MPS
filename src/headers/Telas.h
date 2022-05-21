@@ -11,7 +11,7 @@ using namespace std;
 
 class Telas {
 public:
-    static void MenuPrincipal();
+    static void MenuPrincipal(string login);
     static void AdminFaltado();
     static void Cadastrar(string x);
     static void login();
@@ -33,6 +33,11 @@ public:
     static void usuario_nao_encontrado();
 
     static void modoExib();
+
+    static void AdicionarProdutoNome();
+    static void AdicionarProdutoQuantidade();
+    static void AdicionarProdutoPreco();
+    static void AdicionarProdutoID();
 };
 
 

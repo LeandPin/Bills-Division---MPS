@@ -172,7 +172,7 @@ int main() {
             }
         }
 
-        Telas::MenuPrincipal();
+        Telas::MenuPrincipal(usuario_logado->getLogin());
         cin >> x;
         cin.ignore();
         switch (x) {
@@ -195,8 +195,9 @@ int main() {
                 alterar_dados(usuario_logado);
             }
             break;
-
-        case 3: // Acessar área do administrador caso tenha privilegios
+        case 3:
+            break;
+        case 4: // Acessar área do administrador caso tenha privilegios
             if (usuario_logado -> getPrivilegios()) {
                 Telas::areaAdm();
 
@@ -264,7 +265,7 @@ int main() {
             }
             break;
 
-        case 4:
+        case 5:
             cout << "Obrigado Por Utilizar Nosso Programa!\n" << endl;
             return 1;
             break;
