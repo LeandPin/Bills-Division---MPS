@@ -9,6 +9,7 @@
 #include "Produtos.h"
 
 class GerenciadorDeProdutos {
+public:
     Produtos* criarProduto(string nome, double preco, int codigo, int tipo);
     void modificarInformacoes(Produtos* produto, string nome, double preco, int codigo, int tipo);
 };
