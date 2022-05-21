@@ -10,7 +10,7 @@
 
 class GerenciadorDeProdutos {
 public:
-    Produtos* criarProduto(string nome, double preco, int codigo, int tipo);
+    Produtos* criarProduto(string nome, int quantidade, double preco, int codigo, int tipo);
     void modificarInformacoes(Produtos* produto, string nome, double preco, int codigo, int tipo);
 };
 

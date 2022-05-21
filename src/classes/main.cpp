@@ -12,6 +12,9 @@
 #include "../headers/UserNameException.h"
 #include "../headers/UserNotFoundException.h"
 #include "../headers/UserPasswordException.h"
+#include "../headers/GerenciadorDeUsuarios.h"
+#include "../headers/GerenciadorDeProdutos.h"
+
 using namespace std;
 
 bool existeAdmin(vector < Usuario * > usuarios) {
@@ -103,10 +106,15 @@ bool compare(tuple<int, int, int> d1, tuple<int, int, int> d2){
      return false;
  }
 
+void obter_informacoes_produto(string &nomeProduto, int &quantidade, double &preco, int &ID);
+
+
 int main() {
     const UsuarioAdmin * SUPERUSER = new UsuarioAdmin();
     GerenciadorDeUsuarios gerenteDeUsuarios = GerenciadorDeUsuarios(); // TODO passar para a fachada.
+    GerenciadorDeProdutos gerenteDeProdutos = GerenciadorDeProdutos();
     Usuario * usuario_logado = nullptr;
+    Produtos* produto = nullptr;
     vector < Usuario * > usuarios; // Substituir por std::map<Usuario, Produto>
 
     string _; // variável dummy
@@ -118,6 +126,10 @@ int main() {
     string usuarionormal;
     string conferesenha, conferelogin;
     int dia, mes, ano;
+
+    string nomeProduto;
+    int quantidade = 0, ID = 0;
+    double preco = 0;
 
     while (x != 5) {
         if (!existeAdmin(usuarios)) {
@@ -195,7 +207,10 @@ int main() {
                 alterar_dados(usuario_logado);
             }
             break;
-        case 3:
+        case 3: // Adicionar produto ao usuario;
+            obter_informacoes_produto(nomeProduto, quantidade, preco, ID);
+            produto = gerenteDeProdutos.criarProduto(nomeProduto, quantidade, preco, ID, 0);
+            // TODO implementar uma lista para cada usuário para salvar os produtos.
             break;
         case 4: // Acessar área do administrador caso tenha privilegios
             if (usuario_logado -> getPrivilegios()) {
@@ -273,4 +288,18 @@ int main() {
         }
     }
     return 0;
+}
+
+void obter_informacoes_produto(string &nomeProduto, int &quantidade, double &preco, int &ID) {
+    Telas::AdicionarProdutoNome();
+    cin >> nomeProduto;
+
+    Telas::AdicionarProdutoQuantidade();
+    cin >> quantidade;
+
+    Telas::AdicionarProdutoPreco();
+    cin >> preco;
+
+    Telas::AdicionarProdutoID();
+    cin >> ID;
 }
