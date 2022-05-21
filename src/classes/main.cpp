@@ -105,7 +105,7 @@ bool compare(tuple<int, int, int> d1, tuple<int, int, int> d2){
 
 int main() {
     const UsuarioAdmin * SUPERUSER = new UsuarioAdmin();
-    GerenciadorDeUsuarios gerente = GerenciadorDeUsuarios(); // TODO passar para a fachada.
+    GerenciadorDeUsuarios gerenteDeUsuarios = GerenciadorDeUsuarios(); // TODO passar para a fachada.
     Usuario * usuario_logado = nullptr;
     vector < Usuario * > usuarios; // Substituir por std::map<Usuario, Produto>
 
@@ -144,9 +144,8 @@ int main() {
                 cin.ignore();
 
                 try {
-                    Usuario * admin = SUPERUSER -> CriarUsuario(usuarioprincipal, login, senha, 1, dia, mes, ano);
+                    Usuario *admin = gerenteDeUsuarios.CriarUsuario(usuarioprincipal, login, senha, 1, dia, mes, ano);
 
-                    gerente.alterarDadosDoUsuario(*admin, usuarioprincipal, login, senha, 1, dia, mes, ano);
                     usuarios.push_back(admin);
                     treeSetUsuarios.insert(login);
                     treeSetUsuariosData.insert({dia, mes, ano});
@@ -241,8 +240,9 @@ int main() {
                     }
                     }
                     break;
-                case 2:
-                case 3:
+                case 2: // Modifical algum usuario especifico
+                    break;
+                case 3: // Criar um novo usuário
                     try {
                         Usuario * usuarioNovo = criar_usuario( * SUPERUSER);
                         usuarios.push_back(usuarioNovo);
