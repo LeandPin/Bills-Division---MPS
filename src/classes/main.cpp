@@ -17,95 +17,13 @@
 
 using namespace std;
 
-bool existeAdmin(vector < Usuario * > usuarios) {
-    for (auto elemento: usuarios) {
-        if (elemento -> getPrivilegios()) return true;
-    }
-    return false;
-}
+bool existeAdmin(vector < Usuario * > usuarios);
+bool compare(tuple<int, int, int> d1, tuple<int, int, int> d2);
 
-Usuario * LoginUsuario(vector < Usuario * > usuarios) {
-    string login, senha = "";
-    Telas::Cadastrar("login");
-    getline(cin, login);
+Usuario * LoginUsuario(vector < Usuario * > usuarios);
+Usuario * criar_usuario(UsuarioAdmin adm);
 
-    Telas::Cadastrar("senha");
-    getline(cin, senha);
-
-    for (auto elemento: usuarios) {
-        bool res1 = elemento->compararLogin(login);
-        bool res2 = elemento->compararSenha(senha);
-        if (elemento -> compararLogin(login) && elemento -> compararSenha(senha)) {
-            return elemento;
-        }
-    }
-    throw UserNotFoundException();
-}
-
-Usuario * criar_usuario(UsuarioAdmin adm) {
-    string nome, login, senha, privilegio = "";
-    int dia, mes, ano;
-    Telas::Cadastrar("nome");
-    getline(cin, nome);
-
-    Telas::Cadastrar("login");
-    getline(cin, login);
-
-    Telas::Cadastrar("senha");
-    getline(cin, senha);
-
-    cout << "1 para admin, 0 para normal" << endl;
-    getline(cin, privilegio);
-
-    Telas::Cadastrar("data de nascimento (DD/MM/AAAA)");
-    cin >> dia;
-    cin.ignore();
-    cin >> mes;
-    cin.ignore();
-    cin >> ano;
-
-    if (privilegio == "1") {
-        Usuario * novo_usuario = adm.CriarUsuario(nome, login, senha, 1, dia, mes, ano);
-        return novo_usuario;
-    } else {
-        Usuario * novo_usuario = adm.CriarUsuario(nome, login, senha, 0, dia, mes, ano);
-        return novo_usuario;
-    }
-}
-
-void alterar_dados(Usuario * user) {
-    GerenciadorDeUsuarios gerente = GerenciadorDeUsuarios();
-    string nome, senha = "";
-    Telas::alterarNome();
-    getline(cin, nome);
-
-    Telas::alterarSenha();
-    getline(cin, senha);
-    try {
-        gerente.alterarDadosDoUsuario(*user, nome,"", senha, user->getPrivilegios(), user->getDia(), user->getMes(), user->getAno());
-        // user -> modificarInformacoes(nome, "", senha); depreciado
-    } catch (UserNameException & e) {
-        Telas::login_invalido();
-    } catch (UserPasswordException & e) {
-        Telas::senha_invalida();
-    }
-}
-
-bool compare(tuple<int, int, int> d1, tuple<int, int, int> d2){
-     auto [diaD1, mesD1, anoD1] = d1;
-     auto [diaD2, mesD2, anoD2] = d2;
-     if (anoD1 > anoD2){
-         return true;
-     }
-     if (anoD1 == anoD2 && mesD1 > mesD2){
-         return true;
-     }
-     if (anoD1 == anoD2 && mesD1 == mesD2 && diaD1 > diaD2){
-         return true;
-     }
-     return false;
- }
-
+void alterar_dados(Usuario * user);
 void obter_informacoes_produto(string &nomeProduto, int &quantidade, double &preco, int &ID);
 
 
@@ -290,6 +208,7 @@ int main() {
     return 0;
 }
 
+
 void obter_informacoes_produto(string &nomeProduto, int &quantidade, double &preco, int &ID) {
     Telas::AdicionarProdutoNome();
     cin >> nomeProduto;
@@ -302,4 +221,98 @@ void obter_informacoes_produto(string &nomeProduto, int &quantidade, double &pre
 
     Telas::AdicionarProdutoID();
     cin >> ID;
+}
+
+
+bool compare(tuple<int, int, int> d1, tuple<int, int, int> d2){
+    auto [diaD1, mesD1, anoD1] = d1;
+    auto [diaD2, mesD2, anoD2] = d2;
+    if (anoD1 > anoD2){
+        return true;
+    }
+    if (anoD1 == anoD2 && mesD1 > mesD2){
+        return true;
+    }
+    if (anoD1 == anoD2 && mesD1 == mesD2 && diaD1 > diaD2){
+        return true;
+    }
+    return false;
+}
+
+
+void alterar_dados(Usuario * user) {
+    GerenciadorDeUsuarios gerente = GerenciadorDeUsuarios();
+    string nome, senha = "";
+    Telas::alterarNome();
+    getline(cin, nome);
+
+    Telas::alterarSenha();
+    getline(cin, senha);
+    try {
+        gerente.alterarDadosDoUsuario(*user, nome,"", senha, user->getPrivilegios(), user->getDia(), user->getMes(), user->getAno());
+        // user -> modificarInformacoes(nome, "", senha); depreciado
+    } catch (UserNameException & e) {
+        Telas::login_invalido();
+    } catch (UserPasswordException & e) {
+        Telas::senha_invalida();
+    }
+}
+
+
+Usuario * criar_usuario(UsuarioAdmin adm) {
+    string nome, login, senha, privilegio = "";
+    int dia, mes, ano;
+    Telas::Cadastrar("nome");
+    getline(cin, nome);
+
+    Telas::Cadastrar("login");
+    getline(cin, login);
+
+    Telas::Cadastrar("senha");
+    getline(cin, senha);
+
+    cout << "1 para admin, 0 para normal" << endl;
+    getline(cin, privilegio);
+
+    Telas::Cadastrar("data de nascimento (DD/MM/AAAA)");
+    cin >> dia;
+    cin.ignore();
+    cin >> mes;
+    cin.ignore();
+    cin >> ano;
+
+    if (privilegio == "1") {
+        Usuario * novo_usuario = adm.CriarUsuario(nome, login, senha, 1, dia, mes, ano);
+        return novo_usuario;
+    } else {
+        Usuario * novo_usuario = adm.CriarUsuario(nome, login, senha, 0, dia, mes, ano);
+        return novo_usuario;
+    }
+}
+
+
+Usuario * LoginUsuario(vector < Usuario * > usuarios) {
+    string login, senha = "";
+    Telas::Cadastrar("login");
+    getline(cin, login);
+
+    Telas::Cadastrar("senha");
+    getline(cin, senha);
+
+    for (auto elemento: usuarios) {
+        bool res1 = elemento->compararLogin(login);
+        bool res2 = elemento->compararSenha(senha);
+        if (elemento -> compararLogin(login) && elemento -> compararSenha(senha)) {
+            return elemento;
+        }
+    }
+    throw UserNotFoundException();
+}
+
+
+bool existeAdmin(vector < Usuario * > usuarios) {
+    for (auto elemento: usuarios) {
+        if (elemento -> getPrivilegios()) return true;
+    }
+    return false;
 }
