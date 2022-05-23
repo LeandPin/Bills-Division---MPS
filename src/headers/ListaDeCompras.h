@@ -2,8 +2,8 @@
 // Created by Gabriel on 21/05/2022.
 //
 
-#ifndef MPS___MASTER_FACHADA_H
-#define MPS___MASTER_FACHADA_H
+#ifndef MPS___MASTER_LISTADECOMPRAS_H
+#define MPS___MASTER_LISTADECOMPRAS_H
 
 // Nome temporario
 #include <vector>
@@ -20,7 +20,7 @@ struct elemento {
 
 
 /*
- * Essa classe deve ser uma Fachada singleton
+ * Essa classe deve ser uma ListaDeCompras singleton
  *
  * O que deve ter nessa classe?
  * metodos de adição de produtos a usuarios
@@ -29,20 +29,20 @@ struct elemento {
  *
  * lista de usuarios com os produtos
  */
-class Fachada {
+class ListaDeCompras {
 protected:
-    Fachada(GerenciadorDeUsuarios* gerenciadorDeUsuarios = nullptr, GerenciadorDeProdutos* gerenciadorDeProdutos = nullptr);
+    ListaDeCompras(GerenciadorDeUsuarios* gerenciadorDeUsuarios = nullptr, GerenciadorDeProdutos* gerenciadorDeProdutos = nullptr);
     vector<elemento> listaDeCompras;
     GerenciadorDeUsuarios *gerenteUsuarios_;
     GerenciadorDeProdutos *gerenteProdutos_;
 
-    static Fachada* fachada_;
+    static ListaDeCompras* fachada_;
 
 public:
-    ~Fachada();
-    Fachada(Fachada &other) = delete;
-    void operator=(const Fachada &) = delete;
-    static Fachada *GetInstance(GerenciadorDeUsuarios* gerenciadorDeUsuarios = nullptr, GerenciadorDeProdutos* gerenciadorDeProdutos = nullptr);
+    ~ListaDeCompras();
+    ListaDeCompras(ListaDeCompras &other) = delete;
+    void operator=(const ListaDeCompras &) = delete;
+    static ListaDeCompras *GetInstance(GerenciadorDeUsuarios* gerenciadorDeUsuarios = nullptr, GerenciadorDeProdutos* gerenciadorDeProdutos = nullptr);
     void adicionarUsuarioALista(Usuario* usuario);
     void adiconarProdutoAoUsuario(Usuario* usuario, Produtos* produto);
     vector<Produtos*> listaDeProdutos(string login);
@@ -50,4 +50,4 @@ public:
 };
 
 
-#endif //MPS___MASTER_FACHADA_H
+#endif //MPS___MASTER_LISTADECOMPRAS_H

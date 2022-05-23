@@ -5,7 +5,7 @@
 #include <iterator>
 #include <set>
 #include <tuple>
-#include "../headers/Fachada.h"
+#include "../headers/ListaDeCompras.h"
 #include "../headers/Telas.h"
 #include "../headers/Usuario.h"
 #include "../headers/UsuarioAdmin.h"
@@ -32,7 +32,7 @@ int main() {
     const UsuarioAdmin * SUPERUSER = new UsuarioAdmin();
     GerenciadorDeUsuarios gerenteDeUsuarios = GerenciadorDeUsuarios();
     GerenciadorDeProdutos gerenteDeProdutos = GerenciadorDeProdutos();
-    Fachada* fachada = Fachada::GetInstance(&gerenteDeUsuarios, &gerenteDeProdutos);
+    ListaDeCompras* fachada = ListaDeCompras::GetInstance(&gerenteDeUsuarios, &gerenteDeProdutos);
     Usuario * usuario_logado = nullptr;
     Produtos* produto = nullptr;
 

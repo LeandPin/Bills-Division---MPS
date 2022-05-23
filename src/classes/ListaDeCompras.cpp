@@ -2,22 +2,22 @@
 // Created by Gabriel on 21/05/2022.
 //
 
-#include "Fachada.h"
-Fachada* Fachada::fachada_= nullptr;
+#include "ListaDeCompras.h"
+ListaDeCompras* ListaDeCompras::fachada_= nullptr;
 
-Fachada::Fachada(GerenciadorDeUsuarios *gerenciadorDeUsuarios, GerenciadorDeProdutos *gerenciadorDeProdutos) {
+ListaDeCompras::ListaDeCompras(GerenciadorDeUsuarios *gerenciadorDeUsuarios, GerenciadorDeProdutos *gerenciadorDeProdutos) {
 
 }
 
-Fachada *
-Fachada::GetInstance(GerenciadorDeUsuarios *gerenciadorDeUsuarios, GerenciadorDeProdutos *gerenciadorDeProdutos) {
+ListaDeCompras *
+ListaDeCompras::GetInstance(GerenciadorDeUsuarios *gerenciadorDeUsuarios, GerenciadorDeProdutos *gerenciadorDeProdutos) {
     if (fachada_ == nullptr) {
-        fachada_ = new Fachada(gerenciadorDeUsuarios, gerenciadorDeProdutos);
+        fachada_ = new ListaDeCompras(gerenciadorDeUsuarios, gerenciadorDeProdutos);
     }
     return fachada_;
 }
 
-void Fachada::adicionarUsuarioALista(Usuario *usuario) {
+void ListaDeCompras::adicionarUsuarioALista(Usuario *usuario) {
     if (usuario == nullptr) throw std::invalid_argument("nullptr");
     elemento novo = elemento {
         usuario,
@@ -25,7 +25,7 @@ void Fachada::adicionarUsuarioALista(Usuario *usuario) {
     listaDeCompras.push_back(novo);
 }
 
-void Fachada::adiconarProdutoAoUsuario(Usuario *usuario, Produtos *produto) {
+void ListaDeCompras::adiconarProdutoAoUsuario(Usuario *usuario, Produtos *produto) {
     for (auto &item : listaDeCompras) {
         bool teste = item.usuario->getNome() == usuario->getNome();
         if (item.usuario->getNome() == usuario->getNome()) {
@@ -36,7 +36,7 @@ void Fachada::adiconarProdutoAoUsuario(Usuario *usuario, Produtos *produto) {
     throw UserNotFoundException();
 }
 
-vector<Produtos *> Fachada::listaDeProdutos(string login) {
+vector<Produtos *> ListaDeCompras::listaDeProdutos(string login) {
     for (auto &item : listaDeCompras) {
         if (item.usuario->getLogin() == login) {
             return item.produtos;
@@ -45,7 +45,7 @@ vector<Produtos *> Fachada::listaDeProdutos(string login) {
     throw UserNotFoundException();
 }
 
-vector<Usuario *> Fachada::listaDeUsuarios() {
+vector<Usuario *> ListaDeCompras::listaDeUsuarios() {
     vector<Usuario*> lista;
     for (auto &item : listaDeCompras) {
         lista.push_back(item.usuario);
