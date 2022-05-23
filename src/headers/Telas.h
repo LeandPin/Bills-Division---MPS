@@ -6,6 +6,8 @@
 #define MPS_TELAS_H
 
 #include <iostream>
+#include <vector>
+#include "Usuario.h"
 
 using namespace std;
 
@@ -17,6 +19,7 @@ public:
     static void login();
 
     static void exibirInformacoes(string nome, string login, string senha, bool p, std::tuple<int, int, int> dataNascimento);
+    static void exibirlogins(vector<Usuario*> usuarios);
 
     static void alterarNome();
 

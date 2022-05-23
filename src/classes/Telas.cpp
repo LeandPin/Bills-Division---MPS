@@ -147,3 +147,12 @@ void Telas::AdicionarProdutoID() {
     cout << "\n--------------------------------------------------------------\n" << endl;
     cout << "Digite o número de identificacao (ID) do produto:" << endl;
 }
+
+void Telas::exibirlogins(vector<Usuario*> usuarios) {
+    cout << "\n--------------------------------------------------------------" << endl;
+    cout << "Usuarios Cadastrados: " << endl;
+    for (auto usuario : usuarios) {
+        cout << "   " << usuario->getLogin() << endl;
+    }
+    cout << "\n--------------------------------------------------------------\n" << endl;
+}

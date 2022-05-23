@@ -111,6 +111,7 @@ int main() {
         switch (x) {
         case 1: // Trocar usuário
             Telas::login();
+            Telas::exibirlogins(fachada->listaDeUsuarios());
             try {
                 usuario_logado = LoginUsuario(fachada->listaDeUsuarios());
             } catch (UserNotFoundException & e) {
