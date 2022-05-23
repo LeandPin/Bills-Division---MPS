@@ -125,7 +125,7 @@ int main() {
         case 2: // Ver informações do usuário logado, e possibilidade de altera-las.
             Telas::exibirInformacoes(usuario_logado -> getNome(), usuario_logado -> getLogin(), usuario_logado -> getSenha(),
                 usuario_logado -> getPrivilegios(), usuario_logado->getData());
-            // TODO Exibir também os produtos do usuário.
+            Telas::exibirProdutos(usuario_logado->getLogin(), lista_de_compras->listaDeProdutos(usuario_logado->getLogin()));
             cin >> x;
             cin.ignore();
             if (x == 1) {

@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 #include "Usuario.h"
+#include "Produtos.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ public:
 
     static void exibirInformacoes(string nome, string login, string senha, bool p, std::tuple<int, int, int> dataNascimento);
     static void exibirlogins(vector<Usuario*> usuarios);
+    static void exibirProdutos(string login, vector<Produtos*> produtos);
 
     static void alterarNome();
 

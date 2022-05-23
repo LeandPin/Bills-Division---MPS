@@ -156,3 +156,15 @@ void Telas::exibirlogins(vector<Usuario*> usuarios) {
     }
     cout << "\n--------------------------------------------------------------\n" << endl;
 }
+
+void Telas::exibirProdutos(string login, vector<Produtos *> produtos) {
+    cout << "\n--------------------------------------------------------------" << endl;
+    cout << "Produtos do Usuario: " << login << endl;
+    for (auto produto : produtos) {
+        cout << "   nome: " << produto->getnomeProduto() << endl;
+        cout << "   Quantidade: " << produto->getQuantidade() << endl;
+        cout << "   Preco por unidade: " << produto->getPreco() << endl;
+        cout << "   Preço total: " << produto->getPreco() * produto->getQuantidade() << endl;
+    }
+    cout << "\n--------------------------------------------------------------" << endl;
+}
