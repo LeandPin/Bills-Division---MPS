@@ -21,18 +21,18 @@ using namespace std;
 bool existeAdmin(vector < Usuario * > usuarios);
 bool compare(tuple<int, int, int> d1, tuple<int, int, int> d2);
 
-Usuario * LoginUsuario(vector < Usuario * > usuarios);
-Usuario * criar_usuario(UsuarioAdmin adm);
+Usuario * loginUsuario(vector < Usuario * > usuarios);
+Usuario * criarUsuario(UsuarioAdmin adm);
 
-void alterar_dados(Usuario * user);
-void obter_informacoes_produto(string &nomeProduto, int &quantidade, double &preco, int &ID);
+void alterarDados(Usuario * user);
+void obterInformacoesProduto(string &nomeProduto, int &quantidade, double &preco, int &ID);
 
 
 int main() {
     const UsuarioAdmin * SUPERUSER = new UsuarioAdmin();
-    GerenciadorDeUsuarios gerenteDeUsuarios = GerenciadorDeUsuarios();
-    GerenciadorDeProdutos gerenteDeProdutos = GerenciadorDeProdutos();
-    ListaDeCompras* fachada = ListaDeCompras::GetInstance(&gerenteDeUsuarios, &gerenteDeProdutos);
+    GerenciadorDeUsuarios gerente_de_usuarios = GerenciadorDeUsuarios();
+    GerenciadorDeProdutos gerente_de_produto = GerenciadorDeProdutos();
+    ListaDeCompras* lista_de_compras = ListaDeCompras::GetInstance(&gerente_de_usuarios, &gerente_de_produto);
     Usuario * usuario_logado = nullptr;
     Produtos* produto = nullptr;
 
@@ -52,7 +52,8 @@ int main() {
     double preco = 0;
 
     while (x != 5) {
-        if (!existeAdmin(fachada->listaDeUsuarios())) {
+        // Verifica se exite um usuário adm, é necessário um para o programa funcionar.
+        if (!existeAdmin(lista_de_compras->listaDeUsuarios())) {
             Telas::AdminFaltado();
             cin >> x;
             cin.ignore();
@@ -76,9 +77,9 @@ int main() {
                 cin.ignore();
 
                 try {
-                    Usuario *admin = gerenteDeUsuarios.CriarUsuario(usuarioprincipal, login, senha, 1, dia, mes, ano);
+                    Usuario *admin = gerente_de_usuarios.CriarUsuario(usuarioprincipal, login, senha, 1, dia, mes, ano);
 
-                    fachada->adicionarUsuarioALista(admin);
+                    lista_de_compras->adicionarUsuarioALista(admin);
 
                     treeSetUsuarios.insert(login);
                     treeSetUsuariosData.insert({dia, mes, ano});
@@ -98,7 +99,7 @@ int main() {
         if (usuario_logado == nullptr) {
             Telas::login();
             try {
-                usuario_logado = LoginUsuario(fachada->listaDeUsuarios());
+                usuario_logado = loginUsuario(lista_de_compras->listaDeUsuarios());
             } catch (UserNotFoundException & e) {
                 Telas::usuario_nao_encontrado();
                 continue;
@@ -106,14 +107,15 @@ int main() {
         }
 
         Telas::MenuPrincipal(usuario_logado->getLogin());
+
         cin >> x;
         cin.ignore();
         switch (x) {
         case 1: // Trocar usuário
             Telas::login();
-            Telas::exibirlogins(fachada->listaDeUsuarios());
+            Telas::exibirlogins(lista_de_compras->listaDeUsuarios());
             try {
-                usuario_logado = LoginUsuario(fachada->listaDeUsuarios());
+                usuario_logado = loginUsuario(lista_de_compras->listaDeUsuarios());
             } catch (UserNotFoundException & e) {
                 Telas::usuario_nao_encontrado();
                 continue;
@@ -123,16 +125,17 @@ int main() {
         case 2: // Ver informações do usuário logado, e possibilidade de altera-las.
             Telas::exibirInformacoes(usuario_logado -> getNome(), usuario_logado -> getLogin(), usuario_logado -> getSenha(),
                 usuario_logado -> getPrivilegios(), usuario_logado->getData());
+            // TODO Exibir também os produtos do usuário.
             cin >> x;
             cin.ignore();
             if (x == 1) {
-                alterar_dados(usuario_logado);
+                alterarDados(usuario_logado);
             }
             break;
         case 3: // Adicionar produto ao usuario;
-            obter_informacoes_produto(nomeProduto, quantidade, preco, ID);
-            produto = gerenteDeProdutos.criarProduto(nomeProduto, quantidade, preco, ID, 0);
-            fachada->adiconarProdutoAoUsuario(usuario_logado, produto);
+            obterInformacoesProduto(nomeProduto, quantidade, preco, ID);
+            produto = gerente_de_produto.criarProduto(nomeProduto, quantidade, preco, ID, 0);
+            lista_de_compras->adiconarProdutoAoUsuario(usuario_logado, produto);
             break;
         case 4: // Acessar área do administrador caso tenha privilegios
             if (usuario_logado -> getPrivilegios()) {
@@ -148,7 +151,7 @@ int main() {
                     cin.ignore();
                     switch (x) {
                     case 1: {
-                        for (auto elemento: fachada->listaDeUsuarios()) {
+                        for (auto elemento: lista_de_compras->listaDeUsuarios()) {
                             cout << elemento -> getLogin() << endl;
                         }
                         break;
@@ -165,7 +168,7 @@ int main() {
                         set<std::tuple<int, int, int>>::iterator itt;
                         for ( itt=treeSetUsuariosData.begin(); itt != treeSetUsuariosData.end(); itt++){
                             auto [dia, mes, ano] = *itt;
-                            for(auto elemento: fachada->listaDeUsuarios()){
+                            for(auto elemento: lista_de_compras->listaDeUsuarios()){
                                 if(elemento->getDia()==dia && elemento->getMes()==mes && elemento->getAno()==ano){
                                     cout << elemento -> getLogin() << endl;
                                     break;
@@ -182,8 +185,8 @@ int main() {
                     break;
                 case 3: // Criar um novo usuário
                     try {
-                        Usuario * usuarioNovo = criar_usuario( * SUPERUSER);
-                        fachada->adicionarUsuarioALista(usuarioNovo);
+                        Usuario * usuarioNovo = criarUsuario(*SUPERUSER);
+                        lista_de_compras->adicionarUsuarioALista(usuarioNovo);
 
                         treeSetUsuarios.insert(usuarioNovo -> getLogin());
                         treeSetUsuariosData.insert(usuarioNovo->getData());
@@ -214,7 +217,7 @@ int main() {
 }
 
 
-void obter_informacoes_produto(string &nomeProduto, int &quantidade, double &preco, int &ID) {
+void obterInformacoesProduto(string &nomeProduto, int &quantidade, double &preco, int &ID) {
     Telas::AdicionarProdutoNome();
     cin >> nomeProduto;
 
@@ -245,7 +248,7 @@ bool compare(tuple<int, int, int> d1, tuple<int, int, int> d2){
 }
 
 
-void alterar_dados(Usuario * user) {
+void alterarDados(Usuario * user) {
     GerenciadorDeUsuarios gerente = GerenciadorDeUsuarios();
     string nome, senha = "";
     Telas::alterarNome();
@@ -264,7 +267,7 @@ void alterar_dados(Usuario * user) {
 }
 
 
-Usuario * criar_usuario(UsuarioAdmin adm) {
+Usuario * criarUsuario(UsuarioAdmin adm) {
     string nome, login, senha, privilegio = "";
     int dia, mes, ano;
     Telas::Cadastrar("nome");
@@ -296,7 +299,7 @@ Usuario * criar_usuario(UsuarioAdmin adm) {
 }
 
 
-Usuario * LoginUsuario(vector < Usuario * > usuarios) {
+Usuario * loginUsuario(vector < Usuario * > usuarios) {
     string login, senha = "";
     Telas::Cadastrar("login");
     getline(cin, login);
