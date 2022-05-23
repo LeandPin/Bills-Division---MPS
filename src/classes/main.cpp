@@ -5,6 +5,7 @@
 #include <iterator>
 #include <set>
 #include <tuple>
+#include "../headers/Fachada.h"
 #include "../headers/Telas.h"
 #include "../headers/Usuario.h"
 #include "../headers/UsuarioAdmin.h"
@@ -29,11 +30,12 @@ void obter_informacoes_produto(string &nomeProduto, int &quantidade, double &pre
 
 int main() {
     const UsuarioAdmin * SUPERUSER = new UsuarioAdmin();
-    GerenciadorDeUsuarios gerenteDeUsuarios = GerenciadorDeUsuarios(); // TODO passar para a fachada.
+    GerenciadorDeUsuarios gerenteDeUsuarios = GerenciadorDeUsuarios();
     GerenciadorDeProdutos gerenteDeProdutos = GerenciadorDeProdutos();
+    Fachada* fachada = Fachada::GetInstance(&gerenteDeUsuarios, &gerenteDeProdutos);
     Usuario * usuario_logado = nullptr;
     Produtos* produto = nullptr;
-    vector < Usuario * > usuarios; // Substituir por std::map<Usuario, Produto>
+
 
     string _; // variável dummy
     int x = 0, n = 0; // Variáveis para o funcionamento do while, switch e for
@@ -50,7 +52,7 @@ int main() {
     double preco = 0;
 
     while (x != 5) {
-        if (!existeAdmin(usuarios)) {
+        if (!existeAdmin(fachada->listaDeUsuarios())) {
             Telas::AdminFaltado();
             cin >> x;
             cin.ignore();
@@ -76,7 +78,8 @@ int main() {
                 try {
                     Usuario *admin = gerenteDeUsuarios.CriarUsuario(usuarioprincipal, login, senha, 1, dia, mes, ano);
 
-                    usuarios.push_back(admin);
+                    fachada->adicionarUsuarioALista(admin);
+
                     treeSetUsuarios.insert(login);
                     treeSetUsuariosData.insert({dia, mes, ano});
                 } catch (UserNameException & e) {
@@ -95,7 +98,7 @@ int main() {
         if (usuario_logado == nullptr) {
             Telas::login();
             try {
-                usuario_logado = LoginUsuario(usuarios);
+                usuario_logado = LoginUsuario(fachada->listaDeUsuarios());
             } catch (UserNotFoundException & e) {
                 Telas::usuario_nao_encontrado();
                 continue;
@@ -109,7 +112,7 @@ int main() {
         case 1: // Trocar usuário
             Telas::login();
             try {
-                usuario_logado = LoginUsuario(usuarios);
+                usuario_logado = LoginUsuario(fachada->listaDeUsuarios());
             } catch (UserNotFoundException & e) {
                 Telas::usuario_nao_encontrado();
                 continue;
@@ -128,7 +131,7 @@ int main() {
         case 3: // Adicionar produto ao usuario;
             obter_informacoes_produto(nomeProduto, quantidade, preco, ID);
             produto = gerenteDeProdutos.criarProduto(nomeProduto, quantidade, preco, ID, 0);
-            // TODO implementar uma lista para cada usuário para salvar os produtos.
+            fachada->adiconarProdutoAoUsuario(usuario_logado, produto);
             break;
         case 4: // Acessar área do administrador caso tenha privilegios
             if (usuario_logado -> getPrivilegios()) {
@@ -144,7 +147,7 @@ int main() {
                     cin.ignore();
                     switch (x) {
                     case 1: {
-                        for (auto elemento: usuarios) {
+                        for (auto elemento: fachada->listaDeUsuarios()) {
                             cout << elemento -> getLogin() << endl;
                         }
                         break;
@@ -161,7 +164,7 @@ int main() {
                         set<std::tuple<int, int, int>>::iterator itt;
                         for ( itt=treeSetUsuariosData.begin(); itt != treeSetUsuariosData.end(); itt++){
                             auto [dia, mes, ano] = *itt;
-                            for(auto elemento: usuarios){
+                            for(auto elemento: fachada->listaDeUsuarios()){
                                 if(elemento->getDia()==dia && elemento->getMes()==mes && elemento->getAno()==ano){
                                     cout << elemento -> getLogin() << endl;
                                     break;
@@ -179,7 +182,8 @@ int main() {
                 case 3: // Criar um novo usuário
                     try {
                         Usuario * usuarioNovo = criar_usuario( * SUPERUSER);
-                        usuarios.push_back(usuarioNovo);
+                        fachada->adicionarUsuarioALista(usuarioNovo);
+
                         treeSetUsuarios.insert(usuarioNovo -> getLogin());
                         treeSetUsuariosData.insert(usuarioNovo->getData());
                     } catch (UserNameException & e) {

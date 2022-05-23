@@ -11,10 +11,11 @@
 #include "Produtos.h"
 #include "GerenciadorDeProdutos.h"
 #include "GerenciadorDeUsuarios.h"
+#include "UserNotFoundException.h"
 
 struct elemento {
     Usuario* usuario;
-    vector<Produtos> produtos;
+    vector<Produtos*> produtos;
 };
 
 
@@ -42,9 +43,11 @@ public:
     Fachada(Fachada &other) = delete;
     void operator=(const Fachada &) = delete;
     static Fachada *GetInstance(GerenciadorDeUsuarios* gerenciadorDeUsuarios = nullptr, GerenciadorDeProdutos* gerenciadorDeProdutos = nullptr);
+    void adicionarUsuarioALista(Usuario* usuario);
+    void adiconarProdutoAoUsuario(Usuario* usuario, Produtos* produto);
+    vector<Produtos*> listaDeProdutos(string login);
+    vector<Usuario*> listaDeUsuarios();
 };
-
-Fachada* Fachada::fachada_= nullptr;
 
 
 #endif //MPS___MASTER_FACHADA_H
