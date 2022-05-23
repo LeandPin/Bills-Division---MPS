@@ -164,7 +164,7 @@ void Telas::exibirProdutos(string login, vector<Produtos *> produtos) {
         cout << "   nome: " << produto->getnomeProduto() << endl;
         cout << "   Quantidade: " << produto->getQuantidade() << endl;
         cout << "   Preco por unidade: " << produto->getPreco() << endl;
-        cout << "   Preço total: " << produto->getPreco() * produto->getQuantidade() << endl;
+        cout << "   Preço total: " << produto->getPreco() * produto->getQuantidade() << "\n" << endl;
     }
     cout << "\n--------------------------------------------------------------" << endl;
 }
