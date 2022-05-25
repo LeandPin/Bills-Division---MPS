@@ -20,7 +20,7 @@ bool existeAdmin(vector < Usuario * > usuarios);
 bool compare(tuple<int, int, int> d1, tuple<int, int, int> d2);
 
 Usuario * loginUsuario(vector < Usuario * > usuarios);
-Usuario * criarUsuario(const UsuarioAdmin& adm);
+Usuario * criarUsuario(bool perguntar);
 
 void alterarDados(Usuario * user);
 void obterInformacoesProduto(string &nomeProduto, int &quantidade, double &preco, int &ID);
@@ -56,27 +56,10 @@ int main() {
             cin >> x;
             cin.ignore();
 
+
             if (x == 1) {
-                Telas::Cadastrar("nome");
-                getline(cin, usuarioprincipal);
-
-                Telas::Cadastrar("login");
-                getline(cin, login);
-
-                Telas::Cadastrar("senha");
-                getline(cin, senha);
-
-                Telas::Cadastrar("data de nascimento (DD/MM/AAAA)");
-                std::cin >> dia;
-                cin.ignore();
-                std::cin >> mes;
-                cin.ignore();
-                std::cin >> ano;
-                cin.ignore();
-
                 try {
-                    Usuario *admin = GerenciadorDeUsuarios::CriarUsuario(AdminUserCreator(), usuarioprincipal, login, senha, dia, mes, ano);
-
+                    Usuario* admin = criarUsuario(false);
                     lista_de_compras->adicionarUsuarioALista(admin);
 
                     treeSetUsuarios.insert(login);
@@ -183,7 +166,7 @@ int main() {
                     break;
                 case 3: // Criar um novo usuário
                     try {
-                        Usuario * usuarioNovo = criarUsuario(*SUPERUSER);
+                        Usuario * usuarioNovo = criarUsuario(true);
                         lista_de_compras->adicionarUsuarioALista(usuarioNovo);
 
                         treeSetUsuarios.insert(usuarioNovo -> getLogin());
@@ -208,7 +191,9 @@ int main() {
             cout << "Obrigado Por Utilizar Nosso Programa!\n" << endl;
             return 1;
             break;
-
+        default:
+            cout << "Comando desconhecido." << endl;
+            break;
         }
     }
     return 0;
@@ -265,8 +250,11 @@ void alterarDados(Usuario * user) {
 }
 
 
-Usuario * criarUsuario(const UsuarioAdmin& adm) {
-    string nome, login, senha, privilegio;
+Usuario * criarUsuario(bool perguntar) {
+    /*
+     * Privilégio padrão é 1
+     */
+    string nome, login, senha, privilegio = "1";
     int dia, mes, ano;
     Usuario* novo_usuario;
 
@@ -279,8 +267,10 @@ Usuario * criarUsuario(const UsuarioAdmin& adm) {
     Telas::Cadastrar("senha");
     getline(cin, senha);
 
+    if (perguntar) {
     cout << "1 para admin, 0 para normal" << endl;
     getline(cin, privilegio);
+    }
 
     Telas::Cadastrar("data de nascimento (DD/MM/AAAA)");
     cin >> dia;
@@ -288,6 +278,7 @@ Usuario * criarUsuario(const UsuarioAdmin& adm) {
     cin >> mes;
     cin.ignore();
     cin >> ano;
+    cin.ignore();
 
     if (privilegio == "1") {
         novo_usuario = GerenciadorDeUsuarios::CriarUsuario(AdminUserCreator(), nome, login, senha, dia, mes, ano);
