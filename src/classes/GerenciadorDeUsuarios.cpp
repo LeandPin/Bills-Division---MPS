@@ -41,3 +41,15 @@ void GerenciadorDeUsuarios::alterarDadosDoUsuario(Usuario &u, string nome, strin
 }
 
 
+bool GerenciadorDeUsuarios::compararLogin(const string& login_registrado, const string& login_recebido) {
+    if (login_registrado == login_recebido) return true;
+
+    return false;
+}
+
+
+bool GerenciadorDeUsuarios::compararSenha(const string& senha_registrado, const string& senha_recebido) {
+    if (senha_registrado == senha_recebido) return true;
+
+    return false;
+}

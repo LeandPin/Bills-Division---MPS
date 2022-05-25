@@ -115,22 +115,6 @@ bool Usuario::CheckPswd(string senha){
 }
 
 
-bool Usuario::compararLogin(string login) {
-    if (CheckLogin(login)) {
-        if (this->Login == login) return true;
-    }
-    return false;
-}
-
-
-bool Usuario::compararSenha(string senha) {
-    if (CheckPswd(senha)) {
-        if (this->Senha == senha) return true;
-    }
-    return false;
-}
-
-
 void Usuario::setDATA(int dia, int mes, int ano){
    data_nascimento.setDia(dia);
    data_nascimento.setMes(mes);

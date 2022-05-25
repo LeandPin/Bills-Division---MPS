@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
-#include <cstring>
 #include <vector>
-#include <iterator>
 #include <set>
 #include <tuple>
 #include "../headers/ListaDeCompras.h"
@@ -308,9 +306,10 @@ Usuario * loginUsuario(vector < Usuario * > usuarios) {
     getline(cin, senha);
 
     for (auto elemento: usuarios) {
-        bool res1 = elemento->compararLogin(login);
-        bool res2 = elemento->compararSenha(senha);
-        if (elemento -> compararLogin(login) && elemento -> compararSenha(senha)) {
+        // bool res1 = elemento->compararLogin(login);
+        // bool res2 = elemento->compararSenha(senha);
+        if (GerenciadorDeUsuarios::compararLogin(elemento->getLogin(), login) &&
+            GerenciadorDeUsuarios::compararSenha(elemento->getSenha(), senha)) {
             return elemento;
         }
     }

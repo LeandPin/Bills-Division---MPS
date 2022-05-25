@@ -20,11 +20,13 @@ public:
     Métodos Utilizados na superclasse, com prioridade de cadastro.
     */
     Usuario();
+
     void setNome(string nome);
     void setSenha(string senha);
     void setLogin(string login);
     void setDATA(int dia, int mes, int ano);
     void setPrivilegios(bool p);
+
     string getNome();
     string getSenha();
     string getLogin();
@@ -33,10 +35,6 @@ public:
     int getMes();
     int getDia();
     bool getPrivilegios();
-    
-
-    bool compararLogin(string login);
-    bool compararSenha(string senha);
 
 
 private:
