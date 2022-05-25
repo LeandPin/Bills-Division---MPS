@@ -3,17 +3,19 @@
 //
 
 #include "../headers/GerenciadorDeUsuarios.h"
-#include "../headers/UserNameException.h"
-#include "../headers/UserPasswordException.h"
 #include <utility>
 
-Usuario* GerenciadorDeUsuarios::CriarUsuario(string nome, string login, string senha, bool privilegios, int dia, int mes, int ano) {
-    Usuario* novo_usuario = new Usuario();
 
+Usuario *
+GerenciadorDeUsuarios::CriarUsuario(const UserCreator &creator, string nome, string login, string senha, int dia,
+                                    int mes, int ano) {
+    Usuario* novo_usuario = creator.FactoryMethod();
+
+    novo_usuario->setNome(std::move(nome));
     try{
-    novo_usuario->setLogin(std::move(login));
-    novo_usuario->setSenha(std::move(senha));
-    novo_usuario->setDATA(dia, mes, ano);
+        novo_usuario->setLogin(std::move(login));
+        novo_usuario->setSenha(std::move(senha));
+        novo_usuario->setDATA(dia, mes, ano);
     }
     catch (UserNameException& e) {
         throw e;
@@ -21,8 +23,6 @@ Usuario* GerenciadorDeUsuarios::CriarUsuario(string nome, string login, string s
     catch (UserPasswordException& e) {
         throw e;
     }
-    novo_usuario->setNome(std::move(nome));
-    novo_usuario->setPrivilegios(privilegios);
 
     return novo_usuario;
 }
@@ -53,3 +53,4 @@ bool GerenciadorDeUsuarios::compararSenha(const string& senha_registrado, const 
 
     return false;
 }
+

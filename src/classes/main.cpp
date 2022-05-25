@@ -75,7 +75,7 @@ int main() {
                 cin.ignore();
 
                 try {
-                    Usuario *admin = gerente_de_usuarios.CriarUsuario(usuarioprincipal, login, senha, 1, dia, mes, ano);
+                    Usuario *admin = GerenciadorDeUsuarios::CriarUsuario(AdminUserCreator(), usuarioprincipal, login, senha, dia, mes, ano);
 
                     lista_de_compras->adicionarUsuarioALista(admin);
 
@@ -290,9 +290,9 @@ Usuario * criarUsuario(const UsuarioAdmin& adm) {
     cin >> ano;
 
     if (privilegio == "1") {
-        novo_usuario = GerenciadorDeUsuarios::CriarUsuario(nome, login, senha, true, dia, mes, ano);
+        novo_usuario = GerenciadorDeUsuarios::CriarUsuario(AdminUserCreator(), nome, login, senha, dia, mes, ano);
     } else {
-        novo_usuario = GerenciadorDeUsuarios::CriarUsuario(nome, login, senha, false, dia, mes, ano);
+        novo_usuario = GerenciadorDeUsuarios::CriarUsuario(NormalUserCreator(), nome, login, senha, dia, mes, ano);
     }
     return novo_usuario;
 }

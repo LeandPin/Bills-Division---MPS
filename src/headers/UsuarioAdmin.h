@@ -3,7 +3,6 @@
 #include <iostream>
 #include <string>
 #include "../headers/Usuario.h"
-#include "../headers/GerenciadorDeUsuarios.h"
 /*
 Classe UsuarioAdmin
 Herda Da superclasse Usuario
