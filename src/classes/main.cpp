@@ -20,7 +20,7 @@ bool existeAdmin(vector < Usuario * > usuarios);
 bool compare(tuple<int, int, int> d1, tuple<int, int, int> d2);
 
 Usuario * loginUsuario(vector < Usuario * > usuarios);
-Usuario * criarUsuario(UsuarioAdmin adm);
+Usuario * criarUsuario(const UsuarioAdmin& adm);
 
 void alterarDados(Usuario * user);
 void obterInformacoesProduto(string &nomeProduto, int &quantidade, double &preco, int &ID);
@@ -265,9 +265,11 @@ void alterarDados(Usuario * user) {
 }
 
 
-Usuario * criarUsuario(UsuarioAdmin adm) {
-    string nome, login, senha, privilegio = "";
+Usuario * criarUsuario(const UsuarioAdmin& adm) {
+    string nome, login, senha, privilegio;
     int dia, mes, ano;
+    Usuario* novo_usuario;
+
     Telas::Cadastrar("nome");
     getline(cin, nome);
 
@@ -288,12 +290,11 @@ Usuario * criarUsuario(UsuarioAdmin adm) {
     cin >> ano;
 
     if (privilegio == "1") {
-        Usuario * novo_usuario = adm.CriarUsuario(nome, login, senha, 1, dia, mes, ano);
-        return novo_usuario;
+        novo_usuario = GerenciadorDeUsuarios::CriarUsuario(nome, login, senha, true, dia, mes, ano);
     } else {
-        Usuario * novo_usuario = adm.CriarUsuario(nome, login, senha, 0, dia, mes, ano);
-        return novo_usuario;
+        novo_usuario = GerenciadorDeUsuarios::CriarUsuario(nome, login, senha, false, dia, mes, ano);
     }
+    return novo_usuario;
 }
 
 
