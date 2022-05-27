@@ -7,16 +7,12 @@
 
 // Nome temporario
 #include <vector>
+#include <unordered_map>
 #include "Entidades/Usuario.h"
 #include "Entidades/Produtos.h"
 #include "Controllers/GerenciadorDeProdutos.h"
 #include "Controllers/GerenciadorDeUsuarios.h"
 #include "Exceptions/UserNotFoundException.h"
-
-struct elemento {
-    Usuario* usuario;
-    vector<Produtos*> produtos;
-};
 
 
 /*
@@ -32,7 +28,8 @@ struct elemento {
 class ListaDeCompras {
 protected:
     ListaDeCompras(GerenciadorDeUsuarios* gerenciadorDeUsuarios = nullptr, GerenciadorDeProdutos* gerenciadorDeProdutos = nullptr);
-    vector<elemento> listaDeCompras;
+
+    unordered_map<Usuario*, vector<Produtos*>> listaDeCompras;
     GerenciadorDeUsuarios *gerenteUsuarios_;
     GerenciadorDeProdutos *gerenteProdutos_;
 

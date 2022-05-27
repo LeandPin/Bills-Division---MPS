@@ -19,17 +19,16 @@ ListaDeCompras::GetInstance(GerenciadorDeUsuarios *gerenciadorDeUsuarios, Gerenc
 
 void ListaDeCompras::adicionarUsuarioALista(Usuario *usuario) {
     if (usuario == nullptr) throw std::invalid_argument("nullptr");
-    elemento novo = elemento {
-        usuario,
-    };
-    listaDeCompras.push_back(novo);
+    vector<Produtos*> vetor_vazio;
+    pair<Usuario*, vector<Produtos*>> novo_elemento (usuario, vetor_vazio);
+
+    listaDeCompras.insert(novo_elemento);
 }
 
 void ListaDeCompras::adiconarProdutoAoUsuario(Usuario *usuario, Produtos *produto) {
     for (auto &item : listaDeCompras) {
-        bool teste = item.usuario->getNome() == usuario->getNome();
-        if (item.usuario->getNome() == usuario->getNome()) {
-            item.produtos.push_back(produto);
+        if (item.first->getNome() == usuario->getNome()) {
+            item.second.push_back(produto);
             return;
         }
     }
@@ -38,8 +37,8 @@ void ListaDeCompras::adiconarProdutoAoUsuario(Usuario *usuario, Produtos *produt
 
 vector<Produtos *> ListaDeCompras::listaDeProdutos(string login) {
     for (auto &item : listaDeCompras) {
-        if (item.usuario->getLogin() == login) {
-            return item.produtos;
+        if (item.first->getLogin() == login) {
+            return item.second;
         }
     }
     throw UserNotFoundException();
@@ -48,7 +47,7 @@ vector<Produtos *> ListaDeCompras::listaDeProdutos(string login) {
 vector<Usuario *> ListaDeCompras::listaDeUsuarios() {
     vector<Usuario*> lista;
     for (auto &item : listaDeCompras) {
-        lista.push_back(item.usuario);
+        lista.push_back(item.first);
     }
     return lista;
 }
