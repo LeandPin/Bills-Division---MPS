@@ -6,9 +6,9 @@ Super-classe Referente aos Usuários, com atributos e classes para cadastro.
 #define USUARIO_H
 #include <string>
 #include <iostream>
-#include "../headers/UserNameException.h"
-#include "../headers/UserPasswordException.h"
-#include "../headers/Data.h"
+#include "Exceptions/UserNameException.h"
+#include "Exceptions/UserPasswordException.h"
+#include "Data.h"
 
 using namespace std;
 

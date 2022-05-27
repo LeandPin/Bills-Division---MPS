@@ -2,7 +2,7 @@
 // Created by Gabriel on 20/05/2022.
 //
 
-#include "GerenciadorDeProdutos.h"
+#include "Controllers/GerenciadorDeProdutos.h"
 
 Produtos *GerenciadorDeProdutos::criarProduto(string nome, int quantidade, double preco, int codigo, int tipo) {
     // TODO tratamento de erro necessário para impedir que o codigo quebre nos campos que guardam números. Há conversão de string para int/double.

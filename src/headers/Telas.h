@@ -7,8 +7,8 @@
 
 #include <iostream>
 #include <vector>
-#include "Usuario.h"
-#include "Produtos.h"
+#include "Entidades/Usuario.h"
+#include "Entidades/Produtos.h"
 
 using namespace std;
 

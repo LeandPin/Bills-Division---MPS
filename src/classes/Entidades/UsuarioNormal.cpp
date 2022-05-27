@@ -1,4 +1,4 @@
-#include "../headers/UsuarioNormal.h"
+#include "Entidades/UsuarioNormal.h"
 
 /*
 Construtor Padrão da Classe privilegios

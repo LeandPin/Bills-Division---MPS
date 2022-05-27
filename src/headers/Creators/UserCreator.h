@@ -6,7 +6,7 @@
 #define MPS___MASTER_USERCREATOR_H
 
 
-#include "Usuario.h"
+#include "Entidades/Usuario.h"
 
 class UserCreator {
 public:

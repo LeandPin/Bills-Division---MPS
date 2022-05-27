@@ -5,14 +5,14 @@
 #include <tuple>
 #include "../headers/ListaDeCompras.h"
 #include "../headers/Telas.h"
-#include "../headers/Usuario.h"
-#include "../headers/UsuarioAdmin.h"
-#include "../headers/UsuarioNormal.h"
-#include "../headers/UserNameException.h"
-#include "../headers/UserNotFoundException.h"
-#include "../headers/UserPasswordException.h"
-#include "../headers/GerenciadorDeUsuarios.h"
-#include "../headers/GerenciadorDeProdutos.h"
+#include "Entidades/Usuario.h"
+#include "Entidades/UsuarioAdmin.h"
+#include "Entidades/UsuarioNormal.h"
+#include "Exceptions/UserNameException.h"
+#include "Exceptions/UserNotFoundException.h"
+#include "Exceptions/UserPasswordException.h"
+#include "Controllers/GerenciadorDeUsuarios.h"
+#include "Controllers/GerenciadorDeProdutos.h"
 
 using namespace std;
 
@@ -27,7 +27,6 @@ void obterInformacoesProduto(string &nomeProduto, int &quantidade, double &preco
 
 
 int main() {
-    const UsuarioAdmin * SUPERUSER = new UsuarioAdmin();
     GerenciadorDeUsuarios gerente_de_usuarios = GerenciadorDeUsuarios();
     GerenciadorDeProdutos gerente_de_produto = GerenciadorDeProdutos();
     ListaDeCompras* lista_de_compras = ListaDeCompras::GetInstance(&gerente_de_usuarios, &gerente_de_produto);

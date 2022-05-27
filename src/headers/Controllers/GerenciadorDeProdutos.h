@@ -6,7 +6,7 @@
 #define MPS___MASTER_GERENCIADORDEPRODUTOS_H
 
 
-#include "Produtos.h"
+#include "Entidades/Produtos.h"
 
 class GerenciadorDeProdutos {
 public:

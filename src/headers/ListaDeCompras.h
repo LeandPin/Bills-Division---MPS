@@ -7,11 +7,11 @@
 
 // Nome temporario
 #include <vector>
-#include "Usuario.h"
-#include "Produtos.h"
-#include "GerenciadorDeProdutos.h"
-#include "GerenciadorDeUsuarios.h"
-#include "UserNotFoundException.h"
+#include "Entidades/Usuario.h"
+#include "Entidades/Produtos.h"
+#include "Controllers/GerenciadorDeProdutos.h"
+#include "Controllers/GerenciadorDeUsuarios.h"
+#include "Exceptions/UserNotFoundException.h"
 
 struct elemento {
     Usuario* usuario;

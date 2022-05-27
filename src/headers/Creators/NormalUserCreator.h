@@ -6,7 +6,7 @@
 #define MPS___MASTER_NORMALUSERCREATOR_H
 
 #include "../headers/Creators/UserCreator.h"
-#include "UsuarioNormal.h"
+#include "Entidades/UsuarioNormal.h"
 
 class NormalUserCreator: public UserCreator {
 public:

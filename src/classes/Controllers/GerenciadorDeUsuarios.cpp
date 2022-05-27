@@ -2,7 +2,7 @@
 // Created by Gabriel on 19/04/2022.
 //
 
-#include "../headers/GerenciadorDeUsuarios.h"
+#include "Controllers/GerenciadorDeUsuarios.h"
 #include <utility>
 
 

@@ -1,5 +1,5 @@
-#include "../headers/UsuarioAdmin.h"
-#include "../headers/Usuario.h"
+#include "Entidades/UsuarioAdmin.h"
+#include "Entidades/Usuario.h"
 #include <string>
 #include <iostream>
 using namespace std;

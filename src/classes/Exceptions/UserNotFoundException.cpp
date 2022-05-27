@@ -2,7 +2,7 @@
 // Created by Gabriel on 24/04/2022.
 //
 
-#include "../headers/UserNotFoundException.h"
+#include "Exceptions/UserNotFoundException.h"
 
 const char *UserNotFoundException::what() const noexcept {
     {

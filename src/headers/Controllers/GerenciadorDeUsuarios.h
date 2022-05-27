@@ -5,9 +5,9 @@
 #ifndef MPS_GERENCIADORDEUSUARIOS_H
 #define MPS_GERENCIADORDEUSUARIOS_H
 
-#include "../headers/Usuario.h"
-#include "../headers/Creators/AdminUserCreator.h"
-#include "../headers/Creators/NormalUserCreator.h"
+#include "Entidades/Usuario.h"
+#include "Creators/AdminUserCreator.h"
+#include "Creators/NormalUserCreator.h"
 
 
 class GerenciadorDeUsuarios {

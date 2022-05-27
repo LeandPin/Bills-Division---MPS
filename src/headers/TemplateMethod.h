@@ -2,10 +2,10 @@
 #include <iostream>
 #include <vector>
 
-#include "Usuario.h"
-#include "GerenciadorDeUsuarios.h"
-#include "Produtos.h"
-#include "GerenciadorDeProdutos.h"
+#include "Entidades/Usuario.h"
+#include "Controllers/GerenciadorDeUsuarios.h"
+#include "Entidades/Produtos.h"
+#include "Controllers/GerenciadorDeProdutos.h"
 
 
 class TemplateMethod {

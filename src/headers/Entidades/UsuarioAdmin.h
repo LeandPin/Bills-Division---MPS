@@ -2,7 +2,7 @@
 #define USUARIOADMIN_H
 #include <iostream>
 #include <string>
-#include "../headers/Usuario.h"
+#include "Usuario.h"
 /*
 Classe UsuarioAdmin
 Herda Da superclasse Usuario

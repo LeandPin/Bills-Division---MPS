@@ -6,7 +6,7 @@
 #define MPS___MASTER_ADMINUSERCREATOR_H
 
 #include "../headers/Creators/UserCreator.h"
-#include "../headers/UsuarioAdmin.h"
+#include "Entidades/UsuarioAdmin.h"
 
 class AdminUserCreator: public UserCreator {
 public:

@@ -1,6 +1,6 @@
 #ifndef USUARIONORMAL_H
 #define USUARIONORMAL_H
-#include "../headers/Usuario.h"
+#include "Usuario.h"
 
 /*
 Subclasse privilegios
