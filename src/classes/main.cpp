@@ -3,7 +3,7 @@
 #include <vector>
 #include <set>
 #include <tuple>
-#include "../headers/ListaDeCompras.h"
+#include "Facade/ListaDeCompras.h"
 #include "../headers/Telas.h"
 #include "Entidades/Usuario.h"
 #include "Entidades/UsuarioAdmin.h"

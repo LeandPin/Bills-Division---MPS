@@ -2,7 +2,7 @@
 // Created by Gabriel on 21/05/2022.
 //
 
-#include "ListaDeCompras.h"
+#include "Facade/ListaDeCompras.h"
 ListaDeCompras* ListaDeCompras::fachada_= nullptr;
 
 ListaDeCompras::ListaDeCompras(GerenciadorDeUsuarios *gerenciadorDeUsuarios, GerenciadorDeProdutos *gerenciadorDeProdutos) {
