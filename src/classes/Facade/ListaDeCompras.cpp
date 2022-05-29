@@ -51,3 +51,7 @@ vector<Usuario *> ListaDeCompras::listaDeUsuarios() {
     }
     return lista;
 }
+
+Memento *ListaDeCompras::save() {
+    return new ListaDeCompraMemento(this->listaDeCompras);
+}

@@ -13,6 +13,8 @@
 #include "Controllers/GerenciadorDeProdutos.h"
 #include "Controllers/GerenciadorDeUsuarios.h"
 #include "Exceptions/UserNotFoundException.h"
+#include "../Memento/ListaDeCompraMemento.h"
+#include "Memento/Caretaker.h"
 
 
 /*
@@ -27,13 +29,14 @@
  */
 class ListaDeCompras {
 protected:
-    ListaDeCompras(GerenciadorDeUsuarios* gerenciadorDeUsuarios = nullptr, GerenciadorDeProdutos* gerenciadorDeProdutos = nullptr);
+    explicit ListaDeCompras(GerenciadorDeUsuarios* gerenciadorDeUsuarios = nullptr, GerenciadorDeProdutos* gerenciadorDeProdutos = nullptr);
 
     unordered_map<Usuario*, vector<Produtos*>> listaDeCompras;
     GerenciadorDeUsuarios *gerenteUsuarios_;
     GerenciadorDeProdutos *gerenteProdutos_;
 
     static ListaDeCompras* fachada_;
+    Caretaker* caretaker;
 
 public:
     ~ListaDeCompras();
@@ -44,6 +47,11 @@ public:
     void adiconarProdutoAoUsuario(Usuario* usuario, Produtos* produto);
     vector<Produtos*> listaDeProdutos(string login);
     vector<Usuario*> listaDeUsuarios();
+
+    Memento* save();
+    void restore(Memento* memento) {
+        this->listaDeCompras = memento->state();
+    }
 };
 
 
