@@ -13,6 +13,9 @@
 #include "Exceptions/UserPasswordException.h"
 #include "Controllers/GerenciadorDeUsuarios.h"
 #include "Controllers/GerenciadorDeProdutos.h"
+#include "Command/Invoker.h"
+#include "Command/AddUser.h"
+#include "Command/AddProductToUser.h"
 
 using namespace std;
 
@@ -20,6 +23,7 @@ bool existeAdmin(vector < Usuario * > usuarios);
 bool compare(tuple<int, int, int> d1, tuple<int, int, int> d2);
 
 Usuario * loginUsuario(vector < Usuario * > usuarios);
+void pegarInformacoes(string &nome, string &login, string &senha, bool &privilegio, int &dia, int &mes, int &ano, bool perguntar);
 Usuario * criarUsuario(bool perguntar);
 
 void alterarDados(Usuario * user);
@@ -30,6 +34,7 @@ int main() {
     GerenciadorDeUsuarios gerente_de_usuarios = GerenciadorDeUsuarios();
     GerenciadorDeProdutos gerente_de_produto = GerenciadorDeProdutos();
     ListaDeCompras* lista_de_compras = ListaDeCompras::GetInstance(&gerente_de_usuarios, &gerente_de_produto);
+    Invoker *invoker = new Invoker;
     Usuario * usuario_logado = nullptr;
     Produtos* produto = nullptr;
 
@@ -56,10 +61,10 @@ int main() {
             cin.ignore();
 
 
-            if (x == 1) {
+            if (x == 1) { // Cria o 1º Admin, que é necessário para o programa funcionar.
                 try {
                     Usuario* admin = criarUsuario(false);
-                    lista_de_compras->adicionarUsuarioALista(admin);
+                    invoker->AddUser(new AddUser(*lista_de_compras, *admin));
 
                     treeSetUsuarios.insert(login);
                     treeSetUsuariosData.insert({dia, mes, ano});
@@ -115,7 +120,8 @@ int main() {
         case 3: // Adicionar produto ao usuario;
             obterInformacoesProduto(nomeProduto, quantidade, preco, ID);
             produto = gerente_de_produto.criarProduto(nomeProduto, quantidade, preco, ID, 0);
-            lista_de_compras->adiconarProdutoAoUsuario(usuario_logado, produto);
+            invoker->AddProductToUser(new AddProductToUser(*lista_de_compras, *produto, *usuario_logado));
+            // lista_de_compras->adiconarProdutoAoUsuario(usuario_logado, produto);
             break;
         case 4: // Acessar área do administrador caso tenha privilegios
             if (usuario_logado -> getPrivilegios()) {
@@ -166,7 +172,8 @@ int main() {
                 case 3: // Criar um novo usuário
                     try {
                         Usuario * usuarioNovo = criarUsuario(true);
-                        lista_de_compras->adicionarUsuarioALista(usuarioNovo);
+                        invoker->AddUser(new AddUser(*lista_de_compras, *usuarioNovo));
+                        //lista_de_compras->adicionarUsuarioALista(usuarioNovo);
 
                         treeSetUsuarios.insert(usuarioNovo -> getLogin());
                         treeSetUsuariosData.insert(usuarioNovo->getData());
@@ -249,26 +256,19 @@ void alterarDados(Usuario * user) {
 }
 
 
-Usuario * criarUsuario(bool perguntar) {
-    /*
-     * Privilégio padrão é 1
-     */
-    string nome, login, senha, privilegio = "1";
-    int dia, mes, ano;
-    Usuario* novo_usuario;
-
+void pegarInformacoes(string &nome, string &login, string &senha, bool &privilegio, int &dia, int &mes, int &ano, bool perguntar) {
     Telas::Cadastrar("nome");
-    getline(cin, nome);
+    cin >> nome;
 
     Telas::Cadastrar("login");
-    getline(cin, login);
+    cin >> login;
 
     Telas::Cadastrar("senha");
-    getline(cin, senha);
+    cin >> senha;
 
     if (perguntar) {
-    cout << "1 para admin, 0 para normal" << endl;
-    getline(cin, privilegio);
+        cout << "1 para admin, 0 para normal" << endl;
+        cin >> privilegio;
     }
 
     Telas::Cadastrar("data de nascimento (DD/MM/AAAA)");
@@ -278,8 +278,21 @@ Usuario * criarUsuario(bool perguntar) {
     cin.ignore();
     cin >> ano;
     cin.ignore();
+}
 
-    if (privilegio == "1") {
+
+Usuario * criarUsuario(bool perguntar) {
+    /*
+     * Privilégio padrão é 1
+     */
+    string nome, login, senha;
+    bool privilegio = true;
+    int dia, mes, ano;
+    Usuario* novo_usuario;
+
+    pegarInformacoes(nome, login, senha, privilegio, dia, mes, ano, perguntar);
+
+    if (privilegio) {
         novo_usuario = GerenciadorDeUsuarios::CriarUsuario(AdminUserCreator(), nome, login, senha, dia, mes, ano);
     } else {
         novo_usuario = GerenciadorDeUsuarios::CriarUsuario(NormalUserCreator(), nome, login, senha, dia, mes, ano);
