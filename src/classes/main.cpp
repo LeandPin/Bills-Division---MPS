@@ -16,6 +16,7 @@
 #include "Command/Invoker.h"
 #include "Command/AddUser.h"
 #include "Command/AddProductToUser.h"
+#include "memento/Caretaker.h"
 
 using namespace std;
 
@@ -26,6 +27,7 @@ Usuario * loginUsuario(vector < Usuario * > usuarios);
 void pegarInformacoes(string &nome, string &login, string &senha, bool &privilegio, int &dia, int &mes, int &ano, bool perguntar);
 Usuario * criarUsuario(bool perguntar);
 
+
 void alterarDados(Usuario * user);
 void obterInformacoesProduto(string &nomeProduto, int &quantidade, double &preco, int &ID);
 
@@ -35,6 +37,7 @@ int main() {
     GerenciadorDeProdutos gerente_de_produto = GerenciadorDeProdutos();
     ListaDeCompras* lista_de_compras = ListaDeCompras::GetInstance(&gerente_de_usuarios, &gerente_de_produto);
     Invoker *invoker = new Invoker;
+    Caretaker *caretaker = new Caretaker(lista_de_compras);
     Usuario * usuario_logado = nullptr;
     Produtos* produto = nullptr;
 
@@ -118,6 +121,7 @@ int main() {
             }
             break;
         case 3: // Adicionar produto ao usuario;
+            caretaker->Backup();
             obterInformacoesProduto(nomeProduto, quantidade, preco, ID);
             produto = gerente_de_produto.criarProduto(nomeProduto, quantidade, preco, ID, 0);
             invoker->AddProductToUser(new AddProductToUser(*lista_de_compras, *produto, *usuario_logado));
@@ -171,6 +175,7 @@ int main() {
                     break;
                 case 3: // Criar um novo usuário
                     try {
+                        caretaker->Backup();
                         Usuario * usuarioNovo = criarUsuario(true);
                         invoker->AddUser(new AddUser(*lista_de_compras, *usuarioNovo));
                         //lista_de_compras->adicionarUsuarioALista(usuarioNovo);

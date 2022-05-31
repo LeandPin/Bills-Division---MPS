@@ -52,3 +52,11 @@ vector<Usuario *> ListaDeCompras::listaDeUsuarios() {
     return lista;
 }
 
+ConcreteMemento *ListaDeCompras::Save()  {
+    return new ConcreteMemento(this->listaDeCompras);
+}
+
+void ListaDeCompras::Restore(ConcreteMemento *memento) {
+    this->listaDeCompras = memento->state();
+}
+
