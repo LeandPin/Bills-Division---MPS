@@ -10,6 +10,7 @@
 #include <unordered_map>
 #include "Entidades/Usuario.h"
 #include "Entidades/Produtos.h"
+#include "memento/ConcreteMemento.h"
 #include "Controllers/GerenciadorDeProdutos.h"
 #include "Controllers/GerenciadorDeUsuarios.h"
 #include "Exceptions/UserNotFoundException.h"
@@ -27,7 +28,7 @@
  */
 class ListaDeCompras {
 protected:
-    ListaDeCompras(GerenciadorDeUsuarios* gerenciadorDeUsuarios = nullptr, GerenciadorDeProdutos* gerenciadorDeProdutos = nullptr);
+    explicit ListaDeCompras(GerenciadorDeUsuarios* gerenciadorDeUsuarios = nullptr, GerenciadorDeProdutos* gerenciadorDeProdutos = nullptr);
 
     unordered_map<Usuario*, vector<Produtos*>> listaDeCompras;
     GerenciadorDeUsuarios *gerenteUsuarios_;
@@ -44,6 +45,10 @@ public:
     void adiconarProdutoAoUsuario(Usuario* usuario, Produtos* produto);
     vector<Produtos*> listaDeProdutos(string login);
     vector<Usuario*> listaDeUsuarios();
+
+    ConcreteMemento *Save();
+
+    void Restore(ConcreteMemento *memento);
 };
 
 
