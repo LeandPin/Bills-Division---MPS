@@ -58,7 +58,7 @@ int main() {
                 try {
                     Usuario* admin = Utilitario::criarUsuario(false);
                     invoker->AddUser(new AddUser(*lista_de_compras, *admin));
-
+                    invoker->Do();
                     treeSetUsuarios.insert(login);
                     treeSetUsuariosData.insert({dia, mes, ano});
                 } catch (UserNameException & e) {
@@ -115,7 +115,7 @@ int main() {
             Utilitario::obterInformacoesProduto(nomeProduto, quantidade, preco, ID);
             produto = gerente_de_produto.criarProduto(nomeProduto, quantidade, preco, ID, 0);
             invoker->AddProductToUser(new AddProductToUser(*lista_de_compras, *produto, *usuario_logado));
-            // lista_de_compras->adiconarProdutoAoUsuario(usuario_logado, produto);
+            invoker->Do();
             break;
         case 4: // Acessar área do administrador caso tenha privilegios
             if (usuario_logado -> getPrivilegios()) {
@@ -168,7 +168,7 @@ int main() {
                         caretaker->backup();
                         Usuario * usuarioNovo = Utilitario::criarUsuario(true);
                         invoker->AddUser(new AddUser(*lista_de_compras, *usuarioNovo));
-                        //lista_de_compras->adicionarUsuarioALista(usuarioNovo);
+                        invoker->Do();
 
                         treeSetUsuarios.insert(usuarioNovo -> getLogin());
                         treeSetUsuariosData.insert(usuarioNovo->getData());
