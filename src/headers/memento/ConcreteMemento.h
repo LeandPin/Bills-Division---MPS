@@ -5,9 +5,9 @@
 #ifndef MPS___FORK_CONCRETEMEMENTO_H
 #define MPS___FORK_CONCRETEMEMENTO_H
 
-#include "interface.h"
+#include "Interface.h"
 
-class ConcreteMemento: public interface {
+class ConcreteMemento: public Interface {
 private:
     unordered_map<Usuario*, vector<Produtos*>> state_;
     string date_;

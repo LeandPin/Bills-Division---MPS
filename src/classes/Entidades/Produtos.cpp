@@ -2,7 +2,7 @@
 
 Produtos::Produtos()
 {
-    nomeProduto = "";
+    nome_produto = "";
     codigo = 0;
     tipo = 0;
     preco = 0;
@@ -16,7 +16,7 @@ Produtos::~Produtos()
 
 
 void Produtos::setNomeProduto(string nome){
-    nomeProduto = nome;
+    nome_produto = nome;
 }
 void Produtos::setCodigo(int codigo){
         this-> codigo = codigo;
@@ -32,7 +32,7 @@ void Produtos::setPreco(double preco) {
 
 
 string Produtos::getnomeProduto(){
-    return nomeProduto;
+    return nome_produto;
 }
 
 

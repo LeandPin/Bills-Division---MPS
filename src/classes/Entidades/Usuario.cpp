@@ -4,14 +4,14 @@
 
 /*
 Arquivo Usuario.cpp contendo Construtor da superclasse Usuário 
-e métodos gets e seters para os atributos nomeDoUsuario,Senha e Login.
+e métodos gets e seters para os atributos nome_do_usuario,Senha e Login.
 */
 
 using namespace std;
 
 
 Usuario::Usuario(){
-    nomeDoUsuario = "";
+    nome_do_usuario = "";
     Senha = "";
     Login = "";
     privilegios = false;
@@ -19,17 +19,17 @@ Usuario::Usuario(){
 
 
 void Usuario::setNome(string nome){
-    nomeDoUsuario = nome;
+    nome_do_usuario = nome;
 }
 
 
 string Usuario::getNome(){
-    return nomeDoUsuario;
+    return nome_do_usuario;
 }
 
 
 void Usuario::setSenha(string senha){
-    if (CheckPswd(senha)) {
+    if (checkPswd(senha)) {
     Senha = senha;
     }
     else throw UserPasswordException();
@@ -37,7 +37,7 @@ void Usuario::setSenha(string senha){
 
 
 void Usuario::setLogin(string login){
-    if (CheckLogin(login)) {
+    if (checkLogin(login)) {
         Login = login;
     }
     else throw UserNameException();
@@ -64,7 +64,7 @@ bool Usuario::getPrivilegios(){
     }
 
 
-bool Usuario::CheckLogin(string login){
+bool Usuario::checkLogin(string login){
     /*
      * Verifica os seguintes parametros:
      *      - Máximo 12 caracteres
@@ -86,7 +86,7 @@ bool Usuario::CheckLogin(string login){
 }
 
 
-bool Usuario::CheckPswd(string senha){
+bool Usuario::checkPswd(string senha){
     /*
      * Verificar os seguintes parâmetros:
      *      - Máximo 12 caracteres

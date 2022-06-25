@@ -12,13 +12,13 @@
 
 class AddProductToUser: public CommandInterface{
 private:
-    ListaDeCompras* listaDeCompras_;
+    ListaDeCompras* lista_de_compras_;
     Produtos* produto_;
     Usuario* usuario_;
 
 public:
     AddProductToUser(ListaDeCompras &lista, Produtos &produto, Usuario &usuario);
-    void Execute() const override;
+    void execute() const override;
 
 };
 

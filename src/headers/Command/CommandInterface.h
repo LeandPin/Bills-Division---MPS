@@ -9,7 +9,7 @@
 class CommandInterface {
 public:
     virtual ~CommandInterface() = default;
-    virtual void Execute() const = 0;
+    virtual void execute() const = 0;
 };
 
 

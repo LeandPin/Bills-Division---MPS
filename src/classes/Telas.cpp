@@ -7,13 +7,13 @@
 #include <tuple>
 
 /*
-Função Que Exibe Um MenuPrincipal De Funcionalidades e Opções do Programa.
+Função Que Exibe Um menuPrincipal De Funcionalidades e Opções do Programa.
 */
-void Telas::MenuPrincipal(string login){
+void Telas::menuPrincipal(string login){
     cout<< "\n--------------------------------------------------------------\n" << endl;
     cout << "Este eh o Bill Division, feito Para descomplicar suas comandas!\n" << endl;
     cout << "Ola, " << login << endl;
-    cout << "\n--------------MenuPrincipal De Opcoes-------------------\n" << endl;
+    cout << "\n--------------menuPrincipal De Opcoes-------------------\n" << endl;
     cout << "   Digite 1 Para Trocar de Usuario" << endl;
     cout << "   Digite 2 Para Ver Informacoes do Usuario" << endl;
     cout << "   Digite 3 Para adicionar um produto" << endl;
@@ -24,7 +24,7 @@ void Telas::MenuPrincipal(string login){
 }
 
 
-void Telas::AdminFaltado() {
+void Telas::adminFaltado() {
     cout << "\n--------------------------------------------------------------\n" << endl;
     cout << "Nao ha um administrador cadastrado. Deseja cadastrar um?" << endl;
     cout << "1) Sim." << endl;
@@ -33,7 +33,7 @@ void Telas::AdminFaltado() {
 }
 
 
-void Telas::Cadastrar(string x) {
+void Telas::cadastrar(string x) {
     cout << "\n--------------------------------------------------------------\n" << endl;
     cout << "Digite " << x << endl;
 }
@@ -92,7 +92,7 @@ void Telas::areaAdm() {
 }
 
 
-void Telas::login_invalido() {
+void Telas::loginInvalido() {
     cout<< "\n--------------------------------------------------------------\n" << endl;
     cout << "O login digitado eh invalido. Verifique se ele segue os seguintes parametros:" << endl;
     cout << "- Maximo 12 caracteres\n";
@@ -102,7 +102,7 @@ void Telas::login_invalido() {
 }
 
 
-void Telas::senha_invalida() {
+void Telas::senhaInvalida() {
     cout<< "\n--------------------------------------------------------------\n" << endl;
     cout << "A senha digitada eh invalida. Verifique se ela segue os seguintes parametros:" << endl;
     cout << "- Maximo 20 caracteres\n";
@@ -112,7 +112,7 @@ void Telas::senha_invalida() {
 }
 
 
-void Telas::usuario_nao_encontrado() {
+void Telas::usuarioNaoEncontrado() {
     cout<< "\n--------------------------------------------------------------\n" << endl;
     cout << "O usuario Digitado nao foi encontrado." << endl;
     cout<< "\n--------------------------------------------------------------\n" << endl;
@@ -128,22 +128,22 @@ void Telas::modoExib() {
     cout<< "\n--------------------------------------------------------------\n" << endl;
 }
 
-void Telas::AdicionarProdutoNome() {
+void Telas::adicionarProdutoNome() {
     cout << "\n--------------------------------------------------------------\n" << endl;
     cout << "Digite o Nome do produto:" << endl;
 }
 
-void Telas::AdicionarProdutoQuantidade() {
+void Telas::adicionarProdutoQuantidade() {
     cout << "\n--------------------------------------------------------------\n" << endl;
     cout << "Digite a quantidade do produto:" << endl;
 }
 
-void Telas::AdicionarProdutoPreco() {
+void Telas::adicionarProdutoPreco() {
     cout << "\n--------------------------------------------------------------\n" << endl;
     cout << "Digite o preco do produto:" << endl;
 }
 
-void Telas::AdicionarProdutoID() {
+void Telas::adicionarProdutoId() {
     cout << "\n--------------------------------------------------------------\n" << endl;
     cout << "Digite o número de identificacao (ID) do produto:" << endl;
 }

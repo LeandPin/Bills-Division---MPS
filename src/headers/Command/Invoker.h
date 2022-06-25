@@ -10,8 +10,8 @@
 
 class Invoker {
 private:
-    CommandInterface* AddUser_;
-    CommandInterface* AddProductToUser_;
+    CommandInterface* add_user_;
+    CommandInterface* add_product_to_user_;
 
 
 public:

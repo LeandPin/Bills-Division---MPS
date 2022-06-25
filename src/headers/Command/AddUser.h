@@ -11,12 +11,12 @@
 
 class AddUser: public CommandInterface {
 private:
-    ListaDeCompras *listaDeCompras_;
+    ListaDeCompras *lista_de_compras_;
     Usuario* usuario_;
 
 public:
     AddUser(ListaDeCompras &lista, Usuario &usuario);
-    void Execute() const override;
+    void execute() const override;
 };
 
 

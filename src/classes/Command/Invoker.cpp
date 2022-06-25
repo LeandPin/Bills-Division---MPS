@@ -5,26 +5,26 @@
 #include "Command/Invoker.h"
 
 void Invoker::AddUser(CommandInterface* command) {
-    this->AddUser_ = command;
+    this->add_user_ = command;
 }
 
 void Invoker::AddProductToUser(CommandInterface* command) {
-    this->AddProductToUser_ = command;
+    this->add_product_to_user_ = command;
 }
 
 Invoker::~Invoker() {
-    delete AddUser_;
-    delete AddProductToUser_;
+    delete add_user_;
+    delete add_product_to_user_;
 }
 
 void Invoker::Do() {
-    if (this->AddUser_) {
-        AddUser_->Execute();
-        delete AddUser_;
+    if (this->add_user_) {
+        add_user_->execute();
+        delete add_user_;
     }
-    if (this->AddProductToUser_) {
-        AddProductToUser_->Execute();
-        delete AddProductToUser_;
+    if (this->add_product_to_user_) {
+        add_product_to_user_->execute();
+        delete add_product_to_user_;
     }
 }
 

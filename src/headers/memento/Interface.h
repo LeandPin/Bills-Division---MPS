@@ -11,7 +11,7 @@
 #include <unordered_map>
 #include <vector>
 
-class interface {
+class Interface {
 public:
     virtual std::string date() const = 0;
     virtual unordered_map<Usuario*, vector<Produtos*>> state() const = 0;

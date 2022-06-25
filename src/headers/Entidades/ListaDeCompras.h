@@ -13,7 +13,7 @@
 
 class ListaDeCompras {
 protected:
-    unordered_map<Usuario*, vector<Produtos*>> listaDeCompras;
+    unordered_map<Usuario*, vector<Produtos*>> lista_de_compras;
 
 public:
     Usuario* getUsuario();

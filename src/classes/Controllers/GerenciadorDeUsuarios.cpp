@@ -7,9 +7,9 @@
 
 
 Usuario *
-GerenciadorDeUsuarios::CriarUsuario(const UserCreator &creator, string nome, string login, string senha, int dia,
+GerenciadorDeUsuarios::criarUsuario(const UserCreator &creator, string nome, string login, string senha, int dia,
                                     int mes, int ano) {
-    Usuario* novo_usuario = creator.FactoryMethod();
+    Usuario* novo_usuario = creator.factoryMethod();
 
     novo_usuario->setNome(std::move(nome));
     try{

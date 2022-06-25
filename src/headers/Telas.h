@@ -14,9 +14,9 @@ using namespace std;
 
 class Telas {
 public:
-    static void MenuPrincipal(string login);
-    static void AdminFaltado();
-    static void Cadastrar(string x);
+    static void menuPrincipal(string login);
+    static void adminFaltado();
+    static void cadastrar(string x);
     static void login();
 
     static void exibirInformacoes(string nome, string login, string senha, bool p, std::tuple<int, int, int> dataNascimento);
@@ -31,18 +31,18 @@ public:
 
     static void areaAdm();
 
-    static void login_invalido();
+    static void loginInvalido();
 
-    static void senha_invalida();
+    static void senhaInvalida();
 
-    static void usuario_nao_encontrado();
+    static void usuarioNaoEncontrado();
 
     static void modoExib();
 
-    static void AdicionarProdutoNome();
-    static void AdicionarProdutoQuantidade();
-    static void AdicionarProdutoPreco();
-    static void AdicionarProdutoID();
+    static void adicionarProdutoNome();
+    static void adicionarProdutoQuantidade();
+    static void adicionarProdutoPreco();
+    static void adicionarProdutoId();
 };
 
 

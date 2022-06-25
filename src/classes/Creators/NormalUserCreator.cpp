@@ -4,7 +4,7 @@
 
 #include "Creators/NormalUserCreator.h"
 
-UsuarioNormal *NormalUserCreator::FactoryMethod() const {
+UsuarioNormal *NormalUserCreator::factoryMethod() const {
     UsuarioNormal* novo_usuario = new UsuarioNormal();
 
     return novo_usuario;

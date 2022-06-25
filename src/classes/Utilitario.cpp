@@ -6,16 +6,16 @@
 
 
 void Utilitario::obterInformacoesProduto(string &nomeProduto, int &quantidade, double &preco, int &ID) {
-    Telas::AdicionarProdutoNome();
+    Telas::adicionarProdutoNome();
     cin >> nomeProduto;
 
-    Telas::AdicionarProdutoQuantidade();
+    Telas::adicionarProdutoQuantidade();
     cin >> quantidade;
 
-    Telas::AdicionarProdutoPreco();
+    Telas::adicionarProdutoPreco();
     cin >> preco;
 
-    Telas::AdicionarProdutoID();
+    Telas::adicionarProdutoId();
     cin >> ID;
 }
 
@@ -46,21 +46,21 @@ void Utilitario::alterarDados(Usuario * user, GerenciadorDeUsuarios gerente) {
     try {
         gerente.alterarDadosDoUsuario(*user, nome,"", senha, user->getPrivilegios(), user->getDia(), user->getMes(), user->getAno());
     } catch (UserNameException & e) {
-        Telas::login_invalido();
+        Telas::loginInvalido();
     } catch (UserPasswordException & e) {
-        Telas::senha_invalida();
+        Telas::senhaInvalida();
     }
 }
 
 
 void Utilitario::pegarInformacoes(string &nome, string &login, string &senha, bool &privilegio, int &dia, int &mes, int &ano, bool perguntar) {
-    Telas::Cadastrar("nome");
+    Telas::cadastrar("nome");
     cin >> nome;
 
-    Telas::Cadastrar("login");
+    Telas::cadastrar("login");
     cin >> login;
 
-    Telas::Cadastrar("senha");
+    Telas::cadastrar("senha");
     cin >> senha;
 
     if (perguntar) {
@@ -68,7 +68,7 @@ void Utilitario::pegarInformacoes(string &nome, string &login, string &senha, bo
         cin >> privilegio;
     }
 
-    Telas::Cadastrar("data de nascimento (DD/MM/AAAA)");
+    Telas::cadastrar("data de nascimento (DD/MM/AAAA)");
     cin >> dia;
     cin.ignore();
     cin >> mes;
@@ -90,9 +90,9 @@ Usuario* Utilitario::criarUsuario(bool perguntar) {
     pegarInformacoes(nome, login, senha, privilegio, dia, mes, ano, perguntar);
 
     if (privilegio) {
-        novo_usuario = GerenciadorDeUsuarios::CriarUsuario(AdminUserCreator(), nome, login, senha, dia, mes, ano);
+        novo_usuario = GerenciadorDeUsuarios::criarUsuario(AdminUserCreator(), nome, login, senha, dia, mes, ano);
     } else {
-        novo_usuario = GerenciadorDeUsuarios::CriarUsuario(NormalUserCreator(), nome, login, senha, dia, mes, ano);
+        novo_usuario = GerenciadorDeUsuarios::criarUsuario(NormalUserCreator(), nome, login, senha, dia, mes, ano);
     }
     return novo_usuario;
 }
@@ -100,10 +100,10 @@ Usuario* Utilitario::criarUsuario(bool perguntar) {
 
 Usuario* Utilitario::loginUsuario(vector <Usuario *> usuarios) {
     string login, senha = "";
-    Telas::Cadastrar("login");
+    Telas::cadastrar("login");
     getline(cin, login);
 
-    Telas::Cadastrar("senha");
+    Telas::cadastrar("senha");
     getline(cin, senha);
 
     for (auto elemento: usuarios) {

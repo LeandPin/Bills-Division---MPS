@@ -26,7 +26,7 @@ public:
     int getQuantidade();
 
 private:
-    string nomeProduto;
+    string nome_produto;
     int codigo;
     double preco;
     int quantidade;

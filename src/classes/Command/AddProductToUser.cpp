@@ -5,11 +5,11 @@
 #include "Command/AddProductToUser.h"
 
 AddProductToUser::AddProductToUser(ListaDeCompras &lista, Produtos &produto, Usuario &usuario) {
-    listaDeCompras_ = &lista;
+    lista_de_compras_ = &lista;
     produto_ = &produto;
     usuario_ = &usuario;
 }
 
-void AddProductToUser::Execute() const {
-    listaDeCompras_->adiconarProdutoAoUsuario(usuario_, produto_);
+void AddProductToUser::execute() const {
+    lista_de_compras_->adiconarProdutoAoUsuario(usuario_, produto_);
 }

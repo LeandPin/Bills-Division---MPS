@@ -10,7 +10,7 @@
 
 class AdminUserCreator: public UserCreator {
 public:
-    UsuarioAdmin* FactoryMethod() const override;
+    UsuarioAdmin* factoryMethod() const override;
 };
 
 

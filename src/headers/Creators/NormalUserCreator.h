@@ -10,7 +10,7 @@
 
 class NormalUserCreator: public UserCreator {
 public:
-    UsuarioNormal* FactoryMethod() const override;
+    UsuarioNormal* factoryMethod() const override;
 };
 
 

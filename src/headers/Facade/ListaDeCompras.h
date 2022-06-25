@@ -30,9 +30,9 @@ class ListaDeCompras {
 protected:
     explicit ListaDeCompras(GerenciadorDeUsuarios* gerenciadorDeUsuarios = nullptr, GerenciadorDeProdutos* gerenciadorDeProdutos = nullptr);
 
-    unordered_map<Usuario*, vector<Produtos*>> listaDeCompras;
-    GerenciadorDeUsuarios *gerenteUsuarios_;
-    GerenciadorDeProdutos *gerenteProdutos_;
+    unordered_map<Usuario*, vector<Produtos*>> lista_de_compras;
+    GerenciadorDeUsuarios *gerente_usuarios_;
+    GerenciadorDeProdutos *gerente_produtos_;
 
     static ListaDeCompras* fachada_;
 
@@ -40,15 +40,15 @@ public:
     ~ListaDeCompras();
     ListaDeCompras(ListaDeCompras &other) = delete;
     void operator=(const ListaDeCompras &) = delete;
-    static ListaDeCompras *GetInstance(GerenciadorDeUsuarios* gerenciadorDeUsuarios = nullptr, GerenciadorDeProdutos* gerenciadorDeProdutos = nullptr);
+    static ListaDeCompras *getInstance(GerenciadorDeUsuarios* gerenciadorDeUsuarios = nullptr, GerenciadorDeProdutos* gerenciadorDeProdutos = nullptr);
     void adicionarUsuarioALista(Usuario* usuario);
     void adiconarProdutoAoUsuario(Usuario* usuario, Produtos* produto);
     vector<Produtos*> listaDeProdutos(string login);
     vector<Usuario*> listaDeUsuarios();
 
-    ConcreteMemento *Save();
+    ConcreteMemento *save();
 
-    void Restore(ConcreteMemento *memento);
+    void restore(ConcreteMemento *memento);
 };
 
 

@@ -5,13 +5,13 @@
 #include "Command/AddUser.h"
 
 AddUser::AddUser(ListaDeCompras &lista, Usuario &usuario) {
-    listaDeCompras_ = &lista;
+    lista_de_compras_ = &lista;
     usuario_ = &usuario;
 }
 
 
-void AddUser::Execute() const {
-    listaDeCompras_->adicionarUsuarioALista(usuario_);
+void AddUser::execute() const {
+    lista_de_compras_->adicionarUsuarioALista(usuario_);
 }
 
 

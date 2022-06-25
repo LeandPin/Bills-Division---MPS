@@ -25,7 +25,7 @@ using namespace std;
 int main() {
     GerenciadorDeUsuarios gerente_de_usuarios = GerenciadorDeUsuarios();
     GerenciadorDeProdutos gerente_de_produto = GerenciadorDeProdutos();
-    ListaDeCompras* lista_de_compras = ListaDeCompras::GetInstance(&gerente_de_usuarios, &gerente_de_produto);
+    ListaDeCompras* lista_de_compras = ListaDeCompras::getInstance(&gerente_de_usuarios, &gerente_de_produto);
     Invoker *invoker = new Invoker;
     Caretaker *caretaker = new Caretaker(lista_de_compras);
     Usuario * usuario_logado = nullptr;
@@ -49,7 +49,7 @@ int main() {
     while (x != 5) {
         // Verifica se exite um usuário adm, é necessário um para o programa funcionar.
         if (!Utilitario::existeAdmin(lista_de_compras->listaDeUsuarios())) {
-            Telas::AdminFaltado();
+            Telas::adminFaltado();
             cin >> x;
             cin.ignore();
 
@@ -62,10 +62,10 @@ int main() {
                     treeSetUsuarios.insert(login);
                     treeSetUsuariosData.insert({dia, mes, ano});
                 } catch (UserNameException & e) {
-                    Telas::login_invalido();
+                    Telas::loginInvalido();
                     continue;
                 } catch (UserPasswordException & e) {
-                    Telas::senha_invalida();
+                    Telas::senhaInvalida();
                     continue;
                 }
             } else {
@@ -79,12 +79,12 @@ int main() {
             try {
                 usuario_logado = Utilitario::loginUsuario(lista_de_compras->listaDeUsuarios());
             } catch (UserNotFoundException & e) {
-                Telas::usuario_nao_encontrado();
+                Telas::usuarioNaoEncontrado();
                 continue;
             }
         }
 
-        Telas::MenuPrincipal(usuario_logado->getLogin());
+        Telas::menuPrincipal(usuario_logado->getLogin());
 
         cin >> x;
         cin.ignore();
@@ -95,7 +95,7 @@ int main() {
             try {
                 usuario_logado = Utilitario::loginUsuario(lista_de_compras->listaDeUsuarios());
             } catch (UserNotFoundException & e) {
-                Telas::usuario_nao_encontrado();
+                Telas::usuarioNaoEncontrado();
                 continue;
             }
             break;
@@ -111,7 +111,7 @@ int main() {
             }
             break;
         case 3: // Adicionar produto ao usuario;
-            caretaker->Backup();
+            caretaker->backup();
             Utilitario::obterInformacoesProduto(nomeProduto, quantidade, preco, ID);
             produto = gerente_de_produto.criarProduto(nomeProduto, quantidade, preco, ID, 0);
             invoker->AddProductToUser(new AddProductToUser(*lista_de_compras, *produto, *usuario_logado));
@@ -165,7 +165,7 @@ int main() {
                     break;
                 case 3: // Criar um novo usuário
                     try {
-                        caretaker->Backup();
+                        caretaker->backup();
                         Usuario * usuarioNovo = Utilitario::criarUsuario(true);
                         invoker->AddUser(new AddUser(*lista_de_compras, *usuarioNovo));
                         //lista_de_compras->adicionarUsuarioALista(usuarioNovo);
@@ -173,9 +173,9 @@ int main() {
                         treeSetUsuarios.insert(usuarioNovo -> getLogin());
                         treeSetUsuariosData.insert(usuarioNovo->getData());
                     } catch (UserNameException & e) {
-                        Telas::login_invalido();
+                        Telas::loginInvalido();
                     } catch (UserPasswordException & e) {
-                        Telas::senha_invalida();
+                        Telas::senhaInvalida();
                     }
                     break;
                 default:

@@ -21,7 +21,7 @@ public:
     static bool compare(std::tuple<int, int, int> d1, std::tuple<int, int, int> d2);
 
     static Usuario* loginUsuario(std::vector <Usuario *> usuarios);
-    void pegarInformacoes(std::string &nome, std::string &login, std::string &senha, bool &privilegio, int &dia, int &mes, int &ano, bool perguntar);
+    static void pegarInformacoes(std::string &nome, std::string &login, std::string &senha, bool &privilegio, int &dia, int &mes, int &ano, bool perguntar);
     static Usuario * criarUsuario(bool perguntar);
 
 

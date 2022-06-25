@@ -11,7 +11,7 @@
 class UserCreator {
 public:
     virtual ~UserCreator()= default;;
-    virtual Usuario* FactoryMethod() const = 0;
+    virtual Usuario* factoryMethod() const = 0;
 };
 
 

@@ -16,8 +16,8 @@ private:
 public:
     explicit Caretaker(ListaDeCompras *originator);
 
-    void Backup();
-    void Undo();
+    void backup();
+    void undo();
 };
 
 

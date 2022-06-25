@@ -10,7 +10,7 @@ ListaDeCompras::ListaDeCompras(GerenciadorDeUsuarios *gerenciadorDeUsuarios, Ger
 }
 
 ListaDeCompras *
-ListaDeCompras::GetInstance(GerenciadorDeUsuarios *gerenciadorDeUsuarios, GerenciadorDeProdutos *gerenciadorDeProdutos) {
+ListaDeCompras::getInstance(GerenciadorDeUsuarios *gerenciadorDeUsuarios, GerenciadorDeProdutos *gerenciadorDeProdutos) {
     if (fachada_ == nullptr) {
         fachada_ = new ListaDeCompras(gerenciadorDeUsuarios, gerenciadorDeProdutos);
     }
@@ -22,11 +22,11 @@ void ListaDeCompras::adicionarUsuarioALista(Usuario *usuario) {
     vector<Produtos*> vetor_vazio;
     pair<Usuario*, vector<Produtos*>> novo_elemento (usuario, vetor_vazio);
 
-    listaDeCompras.insert(novo_elemento);
+    lista_de_compras.insert(novo_elemento);
 }
 
 void ListaDeCompras::adiconarProdutoAoUsuario(Usuario *usuario, Produtos *produto) {
-    for (auto &item : listaDeCompras) {
+    for (auto &item : lista_de_compras) {
         if (item.first->getNome() == usuario->getNome()) {
             item.second.push_back(produto);
             return;
@@ -36,7 +36,7 @@ void ListaDeCompras::adiconarProdutoAoUsuario(Usuario *usuario, Produtos *produt
 }
 
 vector<Produtos *> ListaDeCompras::listaDeProdutos(string login) {
-    for (auto &item : listaDeCompras) {
+    for (auto &item : lista_de_compras) {
         if (item.first->getLogin() == login) {
             return item.second;
         }
@@ -46,17 +46,17 @@ vector<Produtos *> ListaDeCompras::listaDeProdutos(string login) {
 
 vector<Usuario *> ListaDeCompras::listaDeUsuarios() {
     vector<Usuario*> lista;
-    for (auto &item : listaDeCompras) {
+    for (auto &item : lista_de_compras) {
         lista.push_back(item.first);
     }
     return lista;
 }
 
-ConcreteMemento *ListaDeCompras::Save()  {
-    return new ConcreteMemento(this->listaDeCompras);
+ConcreteMemento *ListaDeCompras::save()  {
+    return new ConcreteMemento(this->lista_de_compras);
 }
 
-void ListaDeCompras::Restore(ConcreteMemento *memento) {
-    this->listaDeCompras = memento->state();
+void ListaDeCompras::restore(ConcreteMemento *memento) {
+    this->lista_de_compras = memento->state();
 }
 

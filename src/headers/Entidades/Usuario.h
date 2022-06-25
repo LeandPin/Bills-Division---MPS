@@ -41,7 +41,7 @@ private:
     /*
     Atributos Utilizados Para Cadastro do usuário.
     */
-    string nomeDoUsuario;
+    string nome_do_usuario;
     string Senha;
     string Login;
     bool privilegios;
@@ -49,8 +49,8 @@ private:
     
 
 
-    static bool CheckLogin(string login);
-    static bool CheckPswd(string senha);
+    static bool checkLogin(string login);
+    static bool checkPswd(string senha);
 
 
 };

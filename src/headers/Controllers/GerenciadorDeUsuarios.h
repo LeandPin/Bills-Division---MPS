@@ -12,7 +12,7 @@
 
 class GerenciadorDeUsuarios {
 public:
-    static Usuario* CriarUsuario(const UserCreator& creator, string nome, string login, string senha, int dia, int mes, int ano);
+    static Usuario* criarUsuario(const UserCreator& creator, string nome, string login, string senha, int dia, int mes, int ano);
     void alterarDadosDoUsuario(Usuario &u, string nome="", string login="", string senha="", bool privilegio=false, int dia=00, int mes=00, int ano=0000);
 
     static bool compararLogin(const string& login_registrado, const string& login_recebido);
