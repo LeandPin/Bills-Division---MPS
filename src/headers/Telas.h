@@ -43,6 +43,8 @@ public:
     static void adicionarProdutoQuantidade();
     static void adicionarProdutoPreco();
     static void adicionarProdutoId();
+
+    static void salvar();
 };
 
 

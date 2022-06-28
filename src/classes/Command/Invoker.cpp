@@ -20,11 +20,9 @@ Invoker::~Invoker() {
 void Invoker::Do() {
     if (this->add_user_) {
         add_user_->execute();
-        delete add_user_;
     }
     if (this->add_product_to_user_) {
         add_product_to_user_->execute();
-        delete add_product_to_user_;
     }
 }
 
