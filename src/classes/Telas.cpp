@@ -87,9 +87,19 @@ void Telas::areaAdm() {
     cout << "1) Exibir todos os usuarios cadastrados" << endl;
     cout << "2) modificar algum usuario (nao implementado)" << endl;
     cout << "3) Criar novo usuario" << endl;
-    cout << "4) voltar." << endl;
+    cout << "4) Salvar" << endl;
+    cout << "5) voltar." << endl;
     cout<< "\n--------------------------------------------------------------\n" << endl;
 }
+
+void Telas::salvar() {
+    cout<< "\n--------------------------------------------------------------\n" << endl;
+    cout << "Deseja salvar como:" << endl;
+    cout << "1) TXT" << endl;
+    cout << "2) HTML" << endl;
+    cout<< "\n--------------------------------------------------------------\n" << endl;
+}
+
 
 
 void Telas::loginInvalido() {

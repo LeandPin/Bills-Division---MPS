@@ -18,6 +18,8 @@
 #include "Command/AddProductToUser.h"
 #include "memento/Caretaker.h"
 #include "Utilitario.h"
+#include "TemplateMethod/SaveAsTxt.h"
+#include "TemplateMethod/SaveAsHtml.h"
 
 using namespace std;
 
@@ -73,6 +75,10 @@ int main() {
                 return 0;
             }
         }
+        for (auto el:lista_de_compras->listaDeUsuarios()) {
+            cout << el->getLogin() << endl;
+            cout << "acabou";
+        }
 
         if (usuario_logado == nullptr) {
             Telas::login();
@@ -89,112 +95,129 @@ int main() {
         cin >> x;
         cin.ignore();
         switch (x) {
-        case 1: // Trocar usuário
-            Telas::login();
-            Telas::exibirlogins(lista_de_compras->listaDeUsuarios());
-            try {
-                usuario_logado = Utilitario::loginUsuario(lista_de_compras->listaDeUsuarios());
-            } catch (UserNotFoundException & e) {
-                Telas::usuarioNaoEncontrado();
-                continue;
-            }
-            break;
+            case 1: // Trocar usuário
+                Telas::login();
+                Telas::exibirlogins(lista_de_compras->listaDeUsuarios());
+                try {
+                    usuario_logado = Utilitario::loginUsuario(lista_de_compras->listaDeUsuarios());
+                } catch (UserNotFoundException & e) {
+                    Telas::usuarioNaoEncontrado();
+                    continue;
+                }
+                break;
 
-        case 2: // Ver informações do usuário logado, e possibilidade de altera-las.
-            Telas::exibirProdutos(usuario_logado->getLogin(), lista_de_compras->listaDeProdutos(usuario_logado->getLogin()));
-            Telas::exibirInformacoes(usuario_logado -> getNome(), usuario_logado -> getLogin(), usuario_logado -> getSenha(),
-                usuario_logado -> getPrivilegios(), usuario_logado->getData());
-            cin >> x;
-            cin.ignore();
-            if (x == 1) {
-                Utilitario::alterarDados(usuario_logado, gerente_de_usuarios);
-            }
-            break;
-        case 3: // Adicionar produto ao usuario;
-            caretaker->backup();
-            Utilitario::obterInformacoesProduto(nomeProduto, quantidade, preco, ID);
-            produto = gerente_de_produto.criarProduto(nomeProduto, quantidade, preco, ID, 0);
-            invoker->AddProductToUser(new AddProductToUser(*lista_de_compras, *produto, *usuario_logado));
-            invoker->Do();
-            break;
-        case 4: // Acessar área do administrador caso tenha privilegios
-            if (usuario_logado -> getPrivilegios()) {
-                Telas::areaAdm();
-
+            case 2: // Ver informações do usuário logado, e possibilidade de altera-las.
+                Telas::exibirProdutos(usuario_logado->getLogin(), lista_de_compras->listaDeProdutos(usuario_logado->getLogin()));
+                Telas::exibirInformacoes(usuario_logado -> getNome(), usuario_logado -> getLogin(), usuario_logado -> getSenha(),
+                                         usuario_logado -> getPrivilegios(), usuario_logado->getData());
                 cin >> x;
                 cin.ignore();
+                if (x == 1) {
+                    Utilitario::alterarDados(usuario_logado, gerente_de_usuarios);
+                }
+                break;
+            case 3: // Adicionar produto ao usuario;
+                caretaker->backup();
+                Utilitario::obterInformacoesProduto(nomeProduto, quantidade, preco, ID);
+                produto = gerente_de_produto.criarProduto(nomeProduto, quantidade, preco, ID, 0);
+                invoker->AddProductToUser(new AddProductToUser(*lista_de_compras, *produto, *usuario_logado));
+                invoker->Do();
+                break;
+            case 4: // Acessar área do administrador caso tenha privilegios
+                if (usuario_logado -> getPrivilegios()) {
+                    Telas::areaAdm();
 
-                switch (x) {
-                case 1:
-                    Telas::modoExib();
                     cin >> x;
                     cin.ignore();
+
                     switch (x) {
-                    case 1: {
-                        for (auto elemento: lista_de_compras->listaDeUsuarios()) {
-                            cout << elemento -> getLogin() << endl;
-                        }
-                        break;
-                    }
-                    case 2: {
-                        set < string, greater < string > > ::iterator itr;
-                        for (itr = treeSetUsuarios.begin(); itr != treeSetUsuarios.end(); itr++) {
-                            cout << * itr << "\n";
-                        }
-                        cout << endl;
-                        break;
-                    }
-                    case 3: {
-                        set<std::tuple<int, int, int>>::iterator itt;
-                        for ( itt=treeSetUsuariosData.begin(); itt != treeSetUsuariosData.end(); itt++){
-                            auto [dia, mes, ano] = *itt;
-                            for(auto elemento: lista_de_compras->listaDeUsuarios()){
-                                if(elemento->getDia()==dia && elemento->getMes()==mes && elemento->getAno()==ano){
-                                    cout << elemento -> getLogin() << endl;
+                        case 1:
+                            Telas::modoExib();
+                            cin >> x;
+                            cin.ignore();
+                            switch (x) {
+                                case 1: {
+                                    for (auto elemento: lista_de_compras->listaDeUsuarios()) {
+                                        cout << elemento -> getLogin() << endl;
+                                    }
+                                    break;
+                                }
+                                case 2: {
+                                    set < string, greater < string > > ::iterator itr;
+                                    for (itr = treeSetUsuarios.begin(); itr != treeSetUsuarios.end(); itr++) {
+                                        cout << * itr << "\n";
+                                    }
+                                    cout << endl;
+                                    break;
+                                }
+                                case 3: {
+                                    set<std::tuple<int, int, int>>::iterator itt;
+                                    for ( itt=treeSetUsuariosData.begin(); itt != treeSetUsuariosData.end(); itt++){
+                                        auto [dia, mes, ano] = *itt;
+                                        for(auto elemento: lista_de_compras->listaDeUsuarios()){
+                                            if(elemento->getDia()==dia && elemento->getMes()==mes && elemento->getAno()==ano){
+                                                cout << elemento -> getLogin() << endl;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                                default: {
                                     break;
                                 }
                             }
-                        }
-                    }
-                    default: {
-                        break;
-                    }
-                    }
-                    break;
-                case 2: // Modifical algum usuario especifico
-                    break;
-                case 3: // Criar um novo usuário
-                    try {
-                        caretaker->backup();
-                        Usuario * usuarioNovo = Utilitario::criarUsuario(true);
-                        invoker->AddUser(new AddUser(*lista_de_compras, *usuarioNovo));
-                        invoker->Do();
+                            break;
+                        case 2: // Modifical algum usuario especifico
+                            break;
+                        case 3: // Criar um novo usuário
+                            try {
+                                caretaker->backup();
+                                Usuario * usuarioNovo = Utilitario::criarUsuario(true);
+                                invoker->AddUser(new AddUser(*lista_de_compras, *usuarioNovo));
+                                invoker->Do();
 
-                        treeSetUsuarios.insert(usuarioNovo -> getLogin());
-                        treeSetUsuariosData.insert(usuarioNovo->getData());
-                    } catch (UserNameException & e) {
-                        Telas::loginInvalido();
-                    } catch (UserPasswordException & e) {
-                        Telas::senhaInvalida();
-                    }
-                    break;
-                default:
-                    break;
+                                treeSetUsuarios.insert(usuarioNovo -> getLogin());
+                                treeSetUsuariosData.insert(usuarioNovo->getData());
+                            } catch (UserNameException & e) {
+                                Telas::loginInvalido();
+                            } catch (UserPasswordException & e) {
+                                Telas::senhaInvalida();
+                            }
+                            break;
+                        case 4:
+                            Telas::salvar();
+                            cin >> x;
+                            cin.ignore();
 
+                            if (x == 1) {
+                                auto save = new SaveAsTxt(lista_de_compras, ".");
+                                save->executar();
+                                delete save;
+                            }
+                            else if (x == 2) {
+                                auto save = new SaveAsHtml(lista_de_compras, ".");
+                                save->executar();
+                                delete save;
+                            }
+                            else break;
+                            break;
+                        default:
+                            break;
+
+                    }
+                } else {
+                    Telas::semPrivilegios();
+                    cin >> _;
                 }
-            } else {
-                Telas::semPrivilegios();
-                cin >> _;
-            }
-            break;
+                break;
 
-        case 5:
-            cout << "Obrigado Por Utilizar Nosso Programa!\n" << endl;
-            return 1;
-            break;
-        default:
-            cout << "Comando desconhecido." << endl;
-            break;
+            case 5:
+                cout << "Obrigado Por Utilizar Nosso Programa!\n" << endl;
+                return 1;
+                break;
+            default:
+                cout << "Comando desconhecido." << endl;
+                break;
         }
     }
     return 0;
